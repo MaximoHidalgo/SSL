@@ -64,9 +64,9 @@ está en la identificación y comprensión de las etapas y sus productos.
     Investigue sobre bibliotecas. ¿Qué son? ¿Se pueden distribuir? ¿Son portables? ¿Cuáles son sus ventajas y desventajas Desarrolle y utilice la biblioteca studio.
 
 
-# RESPUESTA PREPROCESADO: 
-7.3.1
-## 1 b. "Analizar su contenido. ¿Qué conclusiones saca?":
+# Respuestas preprocesado: 
+7.3.1. 1
+## b. "Analizar su contenido. ¿Qué conclusiones saca?":
     b. Al preprocesar el hello2.c, los resultados que tira la terminal son:
         . Se pudo ver el contenido de la biblioteca stdio.h por terminal.
         . Tambien muestra el codigo del archivo hello2.c pero con modificaciones:
@@ -92,18 +92,22 @@ está en la identificación y comprensión de las etapas y sus productos.
             . En cuanto al codigo, no hay modificación en este porque no hay macros ni includes. El contenido real no cambia nada (más allá de esas líneas # de tracking).
             . Sigue sin modificar la sintaxis.
 
+# Respuestas Compilación: 
 ## 2 c."investigar sobre lenguaje ensamblador, e indicar de formar sintética cual es el objetivo de ese código":
     c.RESPUESTA: El objetivo del código assembler de este programa es declarar e inicializar una variable int i = 42, analiza la función main, llamar a printf("La respuesta es %d\n") y terminar el programa. Imprime "La respuesta es %d\n" sin pasar el valor de %d, pero igual prepara un valor de retorno 0 (return 0) sin que este en el programa.
 
+# Respuestas Vinculación: 
 ## 3 c."Ejecutar y analizar el resultado": 
     c.RESPUESTA: Tuvimos que generar un hello4.c y un hello5.c corrigiendo del hello3.c los errores de sintaxis de prontf que el compilador pedia que fuera printf y la falta de la llave "}" para finalizar la función. Estos dos errores no permitian a hello3.c (que se corrigen en hello4.c) compilar. Esto sucede por la version del compilador que utilizamos (MSYS2 14.2.0) no permitia compilar hello3.c sin corregir esos 2 errores, pero una vez que se corrigen, hello4.c y hello5.c pueden compilar-emsamblar-vincular, generando desde el hello4.c -> hello4.s -> hello4.o -> hello4.exe; sin tener problemas para generar el programa ejecutable (aunque imprima por pantalla "La respuesta es 770619520" lo cual es incorrecto pragmaticamente). Por esta caracteristica en el compilador hello4.c y hello5.c son iguales.
 
+ # Respuestas Corrección de Bug: 
 ## 4 a.verificar que funciona como se espera: 
     a.RESPUESTA: Corregimos el problema pragmatico en "printf("La respuesta es %d\n", );" de manera que esta vez si imprima el valor que buscamos, el cual esta en la variable i. El codigo queda: printf("La respuesta es %d\n", i) y se imprime por consola "La respuesta es 42".
 
+# Respuestas Remoción de prototipo: 
 ## 5.b Explicar porqué funciona; para eso, considerar las siguientes preguntas:
     RESPUESTA:
-    i. ¿Arroja error o warning?
+    - i. ¿Arroja error o warning?
     Si, nos arroja error pero si se presentan los siguientes warnings: 
         "incompatible implicit declaration of built-in function 'printf'"
         "note: include '<stdio.h>' or provide a declaration of 'printf'"
