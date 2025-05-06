@@ -66,19 +66,22 @@ está en la identificación y comprensión de las etapas y sus productos.
 
 # RESPUESTA PREPROCESADO: 
 7.3.1
-## b.Al preprocesar el hello2.c, los resultados que tira la terminal son:
+## 1 b. "Analizar su contenido. ¿Qué conclusiones saca?":
+    b. Al preprocesar el hello2.c, los resultados que tira la terminal son:
         . Se pudo ver el contenido de la biblioteca stdio.h por terminal.
         . Tambien muestra el codigo del archivo hello2.c pero con modificaciones:
         . Elimino el comentario /*medio*/ y tambien el #include <stdio.h> (este lo reemplaza con el contenido del archivo)
         . No se encarga de errores de sintaxis como "prontf" o la falta de "}" para cerrar, ya que el preprocesador no sabe de eso.
 
- ##    d.La primera linea "int printf(const char *restrict s, ...);" en cuanto a lo semantico de esta linea, se puede desglosar en partes:
+## 1 d."Investigar e indicar la semántica de la primera línea": 
+    d. La primera linea "int printf(const char *restrict s, ...);" en cuanto a lo semantico de esta linea, se puede desglosar en partes:
         ."int printf": es la declaracion de una funcion que implica que el tipo de dato es "int" y el nombre de esta función es "printf".
         ."const": esto significa que el dato "char" va a llegar al puntero *restrict s, pero no se permite modificar.
         ."restrict": es una keyword (palabra clave) que significa que s es el único puntero que accede a ese bloque de memoria durante la función. Y "s" indica el formato de printf.
         . Esta funcion tiene una cantidad indefinida de argumentos. O sea que es una función variádica.
 
-##     e. hello3.i es: " # 0 "hello3.c" # 0 "<built-in>"  # 0 "<command-line>" # 1 "hello3.c"
+## 1 e. "Buscar diferencias entre hello3.c y hello3.i":
+    e. hello3.i es: " # 0 "hello3.c" # 0 "<built-in>"  # 0 "<command-line>" # 1 "hello3.c"
         int printf(const char *restrict s, ...);
         int main(void)
         {
@@ -89,5 +92,12 @@ está en la identificación y comprensión de las etapas y sus productos.
             . En cuanto al codigo, no hay modificación en este porque no hay macros ni includes. El contenido real no cambia nada (más allá de esas líneas # de tracking).
             . Sigue sin modificar la sintaxis.
 
-### Crédito extra:
-#### Investigue sobre bibliotecas. ¿Qué son? ¿Se pueden distribuir? ¿Son portables? ¿Cuáles son sus ventajas y desventajas Desarrolle y utilice la biblioteca studio.
+## 2 c."investigar sobre lenguaje ensamblador, e indicar de formar sintética cual es el objetivo de ese código":
+    c.RESPUESTA: El objetivo del código assembler de este programa es declarar e inicializar una variable int i = 42, analiza la función main, llamar a printf("La respuesta es %d\n") y terminar el programa. Imprime "La respuesta es %d\n" sin pasar el valor de %d, pero igual prepara un valor de retorno 0 (return 0) sin que este en el programa.
+
+## 3 c."Ejecutar y analizar el resultado": 
+    c.RESPUESTA: Tuvimos que generar un hello4.c y un hello5.c corrigiendo del hello3.c los errores de sintaxis de prontf que el compilador pedia que fuera printf y la falta de la llave "}" para finalizar la función. Estos dos errores no permitian a hello3.c (que se corrigen en hello4.c) compilar. Esto sucede por la version del compilador que utilizamos (MSYS2 14.2.0) no permitia compilar hello3.c sin corregir esos 2 errores, pero una vez que se corrigen, hello4.c y hello5.c pueden compilar-emsamblar-vincular, generando desde el hello4.c -> hello4.s -> hello4.o -> hello4.exe; sin tener problemas para generar el programa ejecutable (aunque imprima por pantalla "La respuesta es 770619520" lo cual es incorrecto pragmaticamente). Por esta caracteristica en el compilador hello4.c y hello5.c son iguales.
+
+## 4 a.verificar que funciona como se espera: 
+    a.RESPUESTA: Corregimos el problema pragmatico en "printf("La respuesta es %d\n", );" de manera que esta vez si imprima el valor que buscamos, el cual esta en la variable i. El codigo queda: printf("La respuesta es %d\n", i) y se imprime por consola "La respuesta es 42".
+
