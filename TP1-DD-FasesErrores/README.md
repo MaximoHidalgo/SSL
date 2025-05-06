@@ -66,12 +66,13 @@ está en la identificación y comprensión de las etapas y sus productos.
 
 # Respuestas preprocesado: 
 7.3.1. 1
-## b. "Analizar su contenido. ¿Qué conclusiones saca?":
-    b. Al preprocesar el hello2.c, los resultados que tira la terminal son:
-        . Se pudo ver el contenido de la biblioteca stdio.h por terminal.
-        . Tambien muestra el codigo del archivo hello2.c pero con modificaciones:
-        . Elimino el comentario /*medio*/ y tambien el #include <stdio.h> (este lo reemplaza con el contenido del archivo)
-        . No se encarga de errores de sintaxis como "prontf" o la falta de "}" para cerrar, ya que el preprocesador no sabe de eso.
+    
+    -  b. "Analizar su contenido. ¿Qué conclusiones saca?":
+        Al preprocesar el hello2.c, los resultados que tira la terminal son:
+        - Se pudo ver el contenido de la biblioteca stdio.h por terminal.
+        - Tambien muestra el codigo del archivo hello2.c pero con modificaciones:
+        - Elimino el comentario /*medio*/ y tambien el #include <stdio.h> (este lo reemplaza con el contenido del archivo)
+        - No se encarga de errores de sintaxis como "prontf" o la falta de "}" para cerrar, ya que el preprocesador no sabe de eso.
 
 ## 1 d."Investigar e indicar la semántica de la primera línea": 
     d. La primera linea "int printf(const char *restrict s, ...);" en cuanto a lo semantico de esta linea, se puede desglosar en partes:
