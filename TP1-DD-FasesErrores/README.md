@@ -101,3 +101,28 @@ está en la identificación y comprensión de las etapas y sus productos.
 ## 4 a.verificar que funciona como se espera: 
     a.RESPUESTA: Corregimos el problema pragmatico en "printf("La respuesta es %d\n", );" de manera que esta vez si imprima el valor que buscamos, el cual esta en la variable i. El codigo queda: printf("La respuesta es %d\n", i) y se imprime por consola "La respuesta es 42".
 
+## 5.b Explicar porqué funciona; para eso, considerar las siguientes preguntas:
+    RESPUESTA:
+    i. ¿Arroja error o warning?
+    Si, nos arroja error pero si se presentan los siguientes warnings: 
+        "incompatible implicit declaration of built-in function 'printf'"
+        "note: include '<stdio.h>' or provide a declaration of 'printf'"
+    Nos aclara que aunque el programa se ejecute correctamente, no incluir '<stdio.h>' puede generar inconvenientes.
+    ii. ¿Qué es un prototipo y de qué maneras se puede generar? 
+    Un prototipo en C es una declaración anticipada de una función que indica su nombre, tipo de retorno y argumentos. Permite al compilador verificar que las llamadas a la función sean correctas antes de su definición. Se puede escribir manualmente o generar a partir de la definición de la función. Por lo tanto, podemos decir que un prototipo es la llamada a una función. 
+    iii. ¿Qué es una declaración implícita de una función?
+    Ocurre cuando llamás a una función sin haber declarado su prototipo previamente. En C, esto era permitido en versiones antiguas del lenguaje (anteriores a C99), donde el compilador asumía automáticamente que la función devolvía un int y que los parámetros no se verificaban. Lo probamos en dos compiladores con versiones diferentes y en la de version MinGw 6.3.0 compilo pero se generaron muchos warnings, en cambio, en la de la version MSYS2 14.2.0 aprecio un error y no se pudo compilar.
+    iv. ¿Qué indica la especificación?
+    La especificación del lenguaje C indica que, antes de llamar a una función, debe conocerse su prototipo, es decir, su tipo de retorno y los tipos de sus parámetros. Esto permite al compilador verificar que la llamada a la función sea válida. Desde el estándar C99, se eliminó la posibilidad de usar declaraciones implícitas: ya no se permite asumir automáticamente que una función no declarada retorna int.
+    v. ¿Cómo se comportan las principales implementaciones?
+    Las principales implementaciones actuales (como GCC y Clang) siguen el estándar moderno (C99 o posterior), y por lo tanto no permiten la declaración implícita de funciones sin producir advertencias o errores. Se espera que todas las funciones usadas estén declaradas previamente mediante prototipos.
+    vi. ¿Qué es una función built-in?
+    Una función built-in es una función proporcionada directamente por el compilador, no como parte de una biblioteca externa, sino integrada internamente para optimizar el rendimiento o permitir capacidades especiales. Une jemplo seria __builtin_popcount(x) que cuenta cuántos bits en 1 hay en un entero. 
+    vii.¿Conjeture la razón por la cual gcc se comporta como se comporta? ¿Va realmente contra la especificación?
+    GCC se comporta como se comporta para mantener compatibilidad hacia atrás con código legado escrito en C89, donde se permitían declaraciones implícitas de funciones. Sin embargo, desde C99 la declaración implícita está explícitamente prohibida, por lo que ese comportamiento va contra la especificación moderna. Cuando GGC se utiliza con estandares actuales, cumple la especificacion y lanza un error.
+
+
+
+
+
+
