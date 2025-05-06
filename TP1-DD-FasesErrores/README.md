@@ -65,21 +65,21 @@ está en la identificación y comprensión de las etapas y sus productos.
 
 
 # Respuestas preprocesado: 
-7.3.1. 1
-    
-    -  b. "Analizar su contenido. ¿Qué conclusiones saca?":
-        Al preprocesar el hello2.c, los resultados que tira la terminal son:
-        - Se pudo ver el contenido de la biblioteca stdio.h por terminal.
-        - Tambien muestra el codigo del archivo hello2.c pero con modificaciones:
-        - Elimino el comentario /*medio*/ y tambien el #include <stdio.h> (este lo reemplaza con el contenido del archivo)
-        - No se encarga de errores de sintaxis como "prontf" o la falta de "}" para cerrar, ya que el preprocesador no sabe de eso.
+7.3.1.
 
-## 1 d."Investigar e indicar la semántica de la primera línea": 
-    d. La primera linea "int printf(const char *restrict s, ...);" en cuanto a lo semantico de esta linea, se puede desglosar en partes:
-        ."int printf": es la declaracion de una funcion que implica que el tipo de dato es "int" y el nombre de esta función es "printf".
-        ."const": esto significa que el dato "char" va a llegar al puntero *restrict s, pero no se permite modificar.
-        ."restrict": es una keyword (palabra clave) que significa que s es el único puntero que accede a ese bloque de memoria durante la función. Y "s" indica el formato de printf.
-        . Esta funcion tiene una cantidad indefinida de argumentos. O sea que es una función variádica.
+- 1.b. "Analizar su contenido. ¿Qué conclusiones saca?":
+    Al preprocesar el hello2.c, los resultados que tira la terminal son:
+    - Se pudo ver el contenido de la biblioteca stdio.h por terminal.
+    - Tambien muestra el codigo del archivo hello2.c pero con modificaciones:
+    - Elimino el comentario /*medio*/ y tambien el #include <stdio.h> (este lo reemplaza con el contenido del archivo)
+    - No se encarga de errores de sintaxis como "prontf" o la falta de "}" para cerrar, ya que el preprocesador no sabe de eso.
+
+- 1.d."Investigar e indicar la semántica de la primera línea": 
+   La primera linea "int printf(const char *restrict s, ...);" en cuanto a lo semantico de esta linea, se puede desglosar en partes:
+    - "int printf": es la declaracion de una funcion que implica que el tipo de dato es "int" y el nombre de esta función es "printf".
+    - "const": esto significa que el dato "char" va a llegar al puntero *restrict s, pero no se permite modificar.
+    - "restrict": es una keyword (palabra clave) que significa que s es el único puntero que accede a ese bloque de memoria durante la función. Y "s" indica el formato de printf.
+    - Esta funcion tiene una cantidad indefinida de argumentos. O sea que es una función variádica.
 
 ## 1 e. "Buscar diferencias entre hello3.c y hello3.i":
     e. hello3.i es: " # 0 "hello3.c" # 0 "<built-in>"  # 0 "<command-line>" # 1 "hello3.c"
