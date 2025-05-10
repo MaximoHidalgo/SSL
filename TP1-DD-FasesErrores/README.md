@@ -126,7 +126,14 @@ está en la identificación y comprensión de las etapas y sus productos.
     vii.¿Conjeture la razón por la cual gcc se comporta como se comporta? ¿Va realmente contra la especificación?
     GCC se comporta como se comporta para mantener compatibilidad hacia atrás con código legado escrito en C89, donde se permitían declaraciones implícitas de funciones. Sin embargo, desde C99 la declaración implícita está explícitamente prohibida, por lo que ese comportamiento va contra la especificación moderna. Cuando GGC se utiliza con estandares actuales, cumple la especificacion y lanza un error.
 
+# Compilación Separada
+## 6.b Investigar como en su entorno de desarrollo puede generar un programa ejecutable que se base en las dos unidades de traducción 
+    Creamos el archivo de cada uno por separado y luego generamos el objeto de cada uno con los comandos.
+    Por último creamos el ejecutable hello8.exe, que vincula a los dos archivos objetos studio1.c y hello8.c 
+    Aunque el compilador MINGW64 enviaban warnings, como "implicit declaration of function 'prontf' [-Wimplicit-function-declaration]
+     prontf("La respuesta es %d\n", i);" permitió crear el ejecutable que vincula los dos archivos objeto
 
+## 6.c ¿qué ocurre si eliminamos o agregamos argumentos a la invocación de prontf?
 
 
 
