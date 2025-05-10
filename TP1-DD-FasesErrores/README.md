@@ -134,6 +134,10 @@ está en la identificación y comprensión de las etapas y sus productos.
      prontf("La respuesta es %d\n", i);" permitió crear el ejecutable que vincula los dos archivos objeto
 
 ## 6.c ¿qué ocurre si eliminamos o agregamos argumentos a la invocación de prontf?
+    Si eliminamos o agregamos argumentos a la invocación de la función prontf, el programa presentará comportamiento indefinido. Esto significa que puede compilar con advertencias (warnings) o incluso sin errores (sin ningun aviso al compilador), pero al ejecutarse puede producir resultados incorrectos, imprimir basura, o directamente fallar (por ejemplo, con un error de segmentación).
+    Esto ocurre porque en C, las funciones deben ser llamadas con la cantidad y tipo de argumentos exactos que se definieron. Si se pasa un argumento de menos, la función intentará acceder a un valor que no fue proporcionado. Si se pasa un argumento de más, ese valor quedará sin usar y puede afectar el estado de la pila o del programa.
+    Además, si no se declaró previamente la función (por ejemplo, sin incluir un header), el compilador no puede verificar la cantidad de argumentos, lo que agrava el riesgo de errores.
+
 
 
 
