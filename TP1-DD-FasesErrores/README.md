@@ -138,6 +138,8 @@ está en la identificación y comprensión de las etapas y sus productos.
     Esto ocurre porque en C, las funciones deben ser llamadas con la cantidad y tipo de argumentos exactos que se definieron. Si se pasa un argumento de menos, la función intentará acceder a un valor que no fue proporcionado. Si se pasa un argumento de más, ese valor quedará sin usar y puede afectar el estado de la pila o del programa.
     Además, si no se declaró previamente la función (por ejemplo, sin incluir un header), el compilador no puede verificar la cantidad de argumentos, lo que agrava el riesgo de errores.
 
+## 6.d 
+
 
 
 
