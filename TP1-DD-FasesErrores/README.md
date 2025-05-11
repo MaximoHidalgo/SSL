@@ -138,7 +138,17 @@ está en la identificación y comprensión de las etapas y sus productos.
     Esto ocurre porque en C, las funciones deben ser llamadas con la cantidad y tipo de argumentos exactos que se definieron. Si se pasa un argumento de menos, la función intentará acceder a un valor que no fue proporcionado. Si se pasa un argumento de más, ese valor quedará sin usar y puede afectar el estado de la pila o del programa.
     Además, si no se declaró previamente la función (por ejemplo, sin incluir un header), el compilador no puede verificar la cantidad de argumentos, lo que agrava el riesgo de errores.
 
-## 6.d 
+## 6.d.iv Responder: ¿Qué ventaja da incluir el contrato en los clientes y en el proveedor?
+    Incluir el contrato (es decir, la declaración de funciones y estructuras compartidas, generalmente en un archivo .h) tanto en los clientes como en el proveedor permite garantizar que ambas partes tienen una visión coherente y sincronizada de cómo deben interactuar.
+    Ventajas:
+    Asegura que los clientes utilicen correctamente las funciones expuestas por el proveedor (con la misma cantidad y tipo de parámetros).
+    Previene errores por mal uso de funciones, como pasar argumentos incorrectos.
+    El compilador puede detectar errores de uso si un cliente llama mal una función o accede incorrectamente a una estructura.
+    Esto permite encontrar errores temprano, antes de la ejecución.
+    Si se actualiza una función en el proveedor, los clientes que incluyan el mismo contrato van a compilar con error si no se adaptan, lo que obliga a mantener sincronización entre módulos.
+    Permite separar el desarrollo en módulos independientes (cliente y proveedor) que pueden compilarse por separado, siempre que respeten el contrato común.
+
+    
 
 
 
