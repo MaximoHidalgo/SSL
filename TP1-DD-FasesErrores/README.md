@@ -149,7 +149,44 @@ Crédito extra:
                - Si se actualiza una función en el proveedor, los clientes que incluyan el mismo contrato van a compilar con error si no se adaptan, lo que obliga a mantener sincronización entre módulos.
                - Permite separar el desarrollo en módulos independientes (cliente y proveedor) que pueden compilarse por separado, siempre que respeten el contrato común.
 
-    
+## Crédito extra Investigue sobre bibliotecas. ¿Qué son? ¿Se pueden distribuir? ¿Son portables? ¿Cuáles son sus ventajas y desventajas? Desarrolle y utilice la biblioteca studio.
+
+    Que son: Una biblioteca (library) en C es un conjunto de funciones, estructuras, macros u otros recursos que pueden ser reutilizados por múltiples programas sin necesidad de reescribir el código fuente. Se pueden presentar en dos formas: Bibliotecas estáticas (.a en Linux / .lib en Windows): Se incluyen dentro del ejecutable al compilar. Bibliotecas dinámicas o compartidas (.so en Linux / .dll en Windows): Se cargan en tiempo de ejecución.
+    Es posible distribuirla?: Sí. Las bibliotecas se pueden distribuir fácilmente, ya sea como archivos binarios (.dll, .so, .a) o junto con sus headers (.h) para que otros desarrolladores puedan usarlas en sus propios programas.
+    Son portables: Depende. El código fuente de una biblioteca puede ser portable si se evita usar funciones específicas de un sistema operativo. Sin embargo, los archivos compilados no son necesariamente portables entre diferentes sistemas o arquitecturas (por ejemplo, una .dll de Windows no funciona en Linux).
+    Ventajas de su uso:
+    - Reutilización de código.
+    - Modularidad, o sea separar funcionalidades en componentes bien definidos.
+    - Facilita el mantenimiento.
+    - Reducción del tamaño del código.
+    - Permite que múltiples programas compartan la misma lógica, sin duplicación.
+    Desventajas
+    - Compatibilidad: Bibliotecas mal diseñadas pueden ser difíciles de usar o portar.
+    - Versionado: Si cambian las interfaces, pueden romper programas que las usan.
+    - Las bibliotecas dinámicas requieren que el archivo .dll o .so esté presente en el sistema.
+  
+    Desarrollo paso a paso de que hace la biblioteca studio.h y studio2.c:
+            
+    1. studio.h:
+ 
+```c 
+#ifndef _STUDIO_H_INCULDED_
+#define _STUDIO_H_INCULDED_
+void prontf(const char*, int);
+#endif
+```
+Explicación: Este archivo es el contrato de interfaz entre el proveedor y el cliente y permite garantizar que ambas partes tienen una visión de cómo deben interactuar. Las primeras lineas de "#ifndef _STUDIO_H_INCULDED_" y "#define _STUDIO_H_INCULDED_" son las inclusiones y definiciones del archivo, la linea "void prontf(const char*, int);" es la declaracion de la funcion incluida y "#endif" es el cierre del archivo.
+
+    1. studio2.c:
+   
+```c 
+#include "studio.h" // Interfaz que exporta
+#include <stdio.h> // Interfaz que importa
+void prontf(const char* s, int i){
+printf("La respuesta es %d\n", i);
+}
+```
+Explicación: Este archivo es la biblioteca con su/s funcion/es y tiene la posibilidad de ser compartida y portable. Lo que hace linea por linea es: -"#include "studio.h""  Incluye el archivo de cabecera "studio.h" y actua como la interfaz pública -"#include <stdio.h>"  Incluye la biblioteca estándar <stdio.h> para poder usar funciones de entrada/salida como printf. Es una interfaz externa. -"void prontf(const char* s, int i){"  define la función prontf. -"printf("La respuesta es %d\n", i);" llama a printf para imprimir el texto "La respuesta es" seguido del valor entero i, con un salto de línea. "}" cierra la función prontf y termina el archivo.
 
 
 
