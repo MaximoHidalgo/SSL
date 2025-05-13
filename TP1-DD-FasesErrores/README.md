@@ -1,4 +1,19 @@
 # TP1 - Fases de la Traducción y Errores
+**Equipo N.º 2:** *"Sintax Error"*
+
+---
+
+## 👥 Autores de la resolución:
+
+| Nombre completo                | Legajo     | GitHub                                      |
+|-------------------------------|------------|---------------------------------------------|
+| Máximo Juan Manuel Hidalgo    | 176.585-1  | [MaximoHidalgo](https://github.com/MaximoHidalgo) |
+| Priscila Sboboda              | 215.309-9  | [psboboda](https://github.com/psboboda)     |
+| Matias Pretzsch               | 214.029-9  | [MatiasPretzsch](https://github.com/MatiasPretzsch) |
+| Juliana Pansowy Furno         | 222.575-0  | [JulianaPansowyFurno](https://github.com/JulianaPansowyFurno) |
+| María Florencia Bengoechea    | 213.505-0  | [mbengoechea](https://github.com/mbengoechea) |
+| Dylan Oriel Rechusky          | 203.301-0  | [DylanOriel](https://github.com/DylanOriel) |
+| Jeremías Boutet               | 208.705-4  | [Jereboutet](https://github.com/Jereboutet) |
 
 ### 7.1. Objetivos
     Este trabajo tiene como objetivo identificar las fases del proceso de traducción o Build y los posibles 
