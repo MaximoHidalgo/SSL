@@ -30,17 +30,24 @@
 ## 📚 6.2 Temas
 
 - Makefile  
-- Archivos header (`.h`)  
-- Tipo de dato `double`  
+- Archivos header (`.h`)   
 - Funciones  
 - Pruebas unitarias  
 - `assert`  
-  > ⚠️ La comparación de valores flotantes puede ser no trivial debido a su representación y precisión.  
+  > ⚠️ La comparación de los tipos flotantes, como double, no es trivial ni directa debido a su representación y precisión. Debemos incorporar la comparación con tolerancia mediante una función bool que reciba dos flotantes a comparar y un flotante que represente la tolerancia y retorna verdadero si los flotantes están cerca según la tolerancia. Se propone la función AreNear, y también las soluciones presentadas en [DAWSON2012] y [ERICSON2008].  
 - Interfaces e implementación
+- Tipo de dato `double` 
 
 ---
 
-## 🛠️ 6.3 Tareas
+## 🛠️ 6.3 Problema y 6.4 Solución
+
+- Se necesita una tabla que presente las temperaturas Celsius convertidas en Fahrenheit, y otra en el sentido opuesto. 
+- Desarrollar un programa que imprima estas dos tablas de conversión.
+
+---
+
+## 🛠️ 6.5 Tareas
 
 1. Escribir `Makefile`  
 2. Escribir `Conversion.h`  
@@ -50,7 +57,7 @@
 
 ---
 
-## ⛔ 6.4 Restricciones
+## ⛔ 6.6 Restricciones
 
 - Las dos funciones públicas deben llamarse **`Celsius`** y **`Fahrenheit`**.  
 - Utilizar `assert`.  

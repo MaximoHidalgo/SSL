@@ -1,4 +1,11 @@
 #include "Conversion.h"
+#include <stdio.h>
 
-double Celsius (double f) {return 23.3};
-double Fahrenheit (double c) {return 74};
+double Celsius (double fahr) {
+    return (5.0/9.0) * (fahr - 32);
+};
+
+double Fahrenheit (double cels) {
+    return (9.0/5.0 * cels) + 32.0;
+};
+
