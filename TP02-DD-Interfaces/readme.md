@@ -1,8 +1,7 @@
 # TP2 - Interfaces & Makefile - Temperaturas
 
-**Equipo N.º 2:** *"Sintax Error"*
+#### Equipo N.º 2:** *"Sintax Error"*
 
----
 
 ## 👥 Autores de la resolución:
 
@@ -16,7 +15,7 @@
 | Dylan Oriel Rechusky          | 203.301-0  | [DylanOriel](https://github.com/DylanOriel) |
 | Jeremías Boutet               | 208.705-4  | [Jereboutet](https://github.com/Jereboutet) |
 
----
+--- ---
 
 ## 📌 6.1 Objetivos
 
@@ -25,7 +24,6 @@
 - Comprender el proceso de traducción o **Build** cuando intervienen varios archivos fuente.
 - Aplicar el uso de **Makefile**.
 
----
 
 ## 📚 6.2 Temas
 
@@ -38,14 +36,12 @@
 - Interfaces e implementación
 - Tipo de dato `double` 
 
----
 
 ## 🛠️ 6.3 Problema y 6.4 Solución
 
 - Se necesita una tabla que presente las temperaturas Celsius convertidas en Fahrenheit, y otra en el sentido opuesto. 
 - Desarrollar un programa que imprima estas dos tablas de conversión.
 
----
 
 ## 🛠️ 6.5 Tareas
 
@@ -55,7 +51,6 @@
 4. Escribir `Conversion.c`  
 5. Escribir `TablasDeConversion.c`
 
----
 
 ## ⛔ 6.6 Restricciones
 
@@ -64,7 +59,7 @@
 - Usar `const`, no `#define`.  
 - Utilizar `for` con declaración (estilo **C99**)
 
----
+
 
 ## ⭐ Crédito Extra
 
@@ -80,7 +75,6 @@ Desarrollar `TablasDeConversion.c` utilizando funciones del estilo:
 
  Los **límites inferior y superior**, y el **incremento**, deben ser **parámetros** de las funciones.
 
----
 
 ### Generalización de `PrintFilas`
 
@@ -89,5 +83,3 @@ Desarrollar la función `PrintFilas` de forma **genérica**:
 - Debe poder invocarse desde `PrintTablaFahrenheit` y `PrintTablaCelsius`.
 - `PrintFilas` debe invocar a `PrintFila`.
 - Considerar el uso de **punteros a función** para lograr la reutilización.
-
----
