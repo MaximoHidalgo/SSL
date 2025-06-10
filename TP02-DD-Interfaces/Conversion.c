@@ -6,6 +6,6 @@ double Celsius (double fahr) {
 };
 
 double Fahrenheit (double cels) {
-    return (9.0/5.0 * cels) + 32.0;
+    return (9.0/5.0 * cels) + 32;
 };
 

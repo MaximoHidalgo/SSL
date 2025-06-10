@@ -7,16 +7,11 @@ TablasDeConversion.o: TablasDeConversion.c Conversion.h
 ConversionTest.o: ConversionTest.c Conversion.h
 	cc -c ConversionTest.c -o ConversionTest.o
 
-Conversion: Conversion.o 
-	cc Conversion.o -o Conversion
-
 ConversionTest: ConversionTest.o Conversion.o 
 	cc ConversionTest.o Conversion.o -o ConversionTest
 
 TablasDeConversion: TablasDeConversion.o Conversion.o 
 	cc TablasDeConversion.o Conversion.o -o TablasDeConversion
-
-all: TablasDeConversion ConversionTest
 
 tablas: TablasDeConversion
 	./TablasDeConversion
@@ -24,7 +19,7 @@ tablas: TablasDeConversion
 test: ConversionTest
 	./ConversionTest
 
-todo: all
+all: TablasDeConversion ConversionTest
 	@echo "Mostrando tablas..."
 	./TablasDeConversion
 	@echo ""
