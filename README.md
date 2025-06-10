@@ -2,7 +2,7 @@
 
 ## 📚 Sintaxis y Semántica de los Lenguajes - Año 2025  
 **Curso:** K2002  
-**Equipo N.º 2:** *"Sintax Error"*
+**Equipo N.º 2:** *Sintax Error*
 
 ---
 
@@ -19,3 +19,9 @@
 | Jeremías Boutet               | 208.705-4  | [Jereboutet](https://github.com/Jereboutet) |
 
 ---
+
+## 📚 Trabajos practicos de la materia
+
+### *TP01-FasesErrores*
+
+### *TP02-Interfaces*
