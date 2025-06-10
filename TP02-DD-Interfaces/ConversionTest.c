@@ -1,5 +1,5 @@
 #include "Conversion.h"
-#include "Conversion.c"
+#include <stdio.h>
 #include <assert.h>
 #include <math.h>
 #include <stdbool.h>
@@ -47,7 +47,6 @@ void testPuntosCriticos(void) {
     // Prueba 5: -40°F debe ser -40°C
     assert(AreNear(Celsius(-40), -40.00, 0.01));
     
-
 }
 
 

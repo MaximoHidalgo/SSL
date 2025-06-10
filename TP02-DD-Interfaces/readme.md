@@ -1,6 +1,6 @@
 # TP2 - Interfaces & Makefile - Temperaturas
 
-#### Equipo N.º 2:** *"Sintax Error"*
+#### Equipo N.º 2: *"Sintax Error"*
 
 
 ## 👥 Autores de la resolución:
