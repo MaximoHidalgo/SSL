@@ -1,0 +1,30 @@
+digraph RemoveComments {
+    "INICIAL" -> "INICIAL" [label = "Caracter normal"];
+    "INICIAL" -> "BARRA" [label = "/"];
+    "INICIAL" -> "CADENA" [label = "\""];
+
+    "BARRA" -> "COMENTARIO_SIMPLE" [label = "/"];
+    "BARRA" -> "COMENTARIO_MULTIPLE" [label = "*"];
+    "BARRA" -> "INICIAL" [label = "Nueva linea"];
+
+    "COMENTARIO_SIMPLE" -> "COMENTARIO_SIMPLE" [label = "No nueva linea"];
+    "COMENTARIO_SIMPLE" -> "INICIAL" [label = "Nueval linea"];
+
+    "COMENTARIO_MULTIPLE" -> "COMENTARIO_MULTIPLPE" [label = "No *"];
+    "COMENTARIO_MULTIPLE" -> "FIN_COMENTARIO_MULTIPLE" [label = "No *"];
+
+    "FIN_COMENTARIO_MULTIPLE" -> "COMENTARIO_MULTIPLE" [label = "No /"];
+    "FIN_COMENTARIO_MULTIPLE" -> "INICIAL" [label = "/"];
+
+    "CADENA" -> "CADENA" [label = "No \\"];
+    "CADENA" -> "ESCAPE_EN_CADENA" [label = "\\"];
+    "CADENA" -> "INICIAL" [label = "\""];
+
+    "ESCAPE_EN_CADENA" -> "CADENA" [label = "Cualquier caracter"];
+
+    "CARACTER" -> "CARACTER" [label = "No \\"];
+    "CARACTER" -> "ESCAPE_EN_CARACTER" [label = "\\"];
+    "CARACTER" -> "INICIAL" [label = "'"];
+
+    "ESCAPE_EN_CARACTER" -> "CARACTER" [label = "Cualquier caracter"];    
+}
