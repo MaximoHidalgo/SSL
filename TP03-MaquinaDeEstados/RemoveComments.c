@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
-#ifdef IMPLEMENTACION_1
+
 
 typedef enum {
     INICIAL,
@@ -15,6 +16,8 @@ typedef enum {
     ESCAPE_EN_CARACTER,
     NUM_ESTADOS
 } Estado;
+
+#ifdef IMPLEMENTACION_1
 
 typedef struct {
     Estado proximoEstado;
@@ -25,89 +28,86 @@ Transicion tablaDeTransiciones[NUM_ESTADOS][256];
 
 void inicializarTabla() {
     for(int c = 0; c < 256; c++) {
-        tablaDeTransicion[INICIAL][c] = (Transicion){INICIAL, true}; 
+        tablaDeTransiciones[INICIAL][c] = (Transicion){INICIAL, true};
     }
 
-    tablaDeTransicion[INICIAL]['/'] = (Transicion){BARRA, true};
-    tablaDeTransicion[INICIAL]['"'] = (Transicion){CADENA, true};
-    tablaDeTransicion[INICIAL]['\''] = (Transicion){CARACTER, true};
-    
-    tablaDeTransicion[BARRA]['/'] = (Transicion){COMENTARIO_SIMPLE, false};
-    tablaDeTransicion[BARRA]['*'] = (Transicion){COMENTARIO_MULTIPLE, false};
+    tablaDeTransiciones[INICIAL]['/'] = (Transicion){BARRA, false};
+    tablaDeTransiciones[INICIAL]['"'] = (Transicion){CADENA, true};
+    tablaDeTransiciones[INICIAL]['\''] = (Transicion){CARACTER, true};
+
+    tablaDeTransiciones[BARRA]['/'] = (Transicion){COMENTARIO_SIMPLE, false};
+    tablaDeTransiciones[BARRA]['*'] = (Transicion){COMENTARIO_MULTIPLE, false};
     for(int c = 0; c < 256; c++) {
-        if(c != '/' && != '*') {
-            tablaDeTransicion[BARRA][c] = (Transicion){INICIAL, true};
+        if(c != '/' && c != '*') {
+            tablaDeTransiciones[BARRA][c] = (Transicion){INICIAL, true};
         }
     }
 
-    for(int c = 0; c < 256; c++){
-        tablaDeTransicion[COMENTARIO_SIMPLE][C] = (Transicion){COMENTARIO_SIMPLE, false};
+    for(int c = 0; c < 256; c++) {
+        tablaDeTransiciones[COMENTARIO_SIMPLE][c] = (Transicion){COMENTARIO_SIMPLE, false};
     }
-    tablaDeTransacion[COMENTARIO_SIMPLE]['\n'] = (Transicion){INICIAL, true};
+    tablaDeTransiciones[COMENTARIO_SIMPLE]['\n'] = (Transicion){INICIAL, true};
 
     for(int c = 0; c < 256; c++) {
-        tablaDeTransicion[COMENTARIO_MULTIPLE][c] = (Transicion){COMENTARIO_MULTIPLE, false};
+        tablaDeTransiciones[COMENTARIO_MULTIPLE][c] = (Transicion){COMENTARIO_MULTIPLE, false};
     }
-    tablaDeTransacion[COMENTARIO_MULTIPLE]['*'] = (transicion){FIN_COMENTARIO_MULTIPLE, false};
-    
-    for(int c = 0; c < 256; c++) {
-        tablaDeTransicion[FIN_COMENTARIO_MULTIPLE][c] = (Transicion){COMENTARIO_MULTIPLE, false};
-    }
-    tablaDeTransacion[FIN_COMENTARIO_MULTIPLE]['/'] = (transicion){INICIAL, false};
+    tablaDeTransiciones[COMENTARIO_MULTIPLE]['*'] = (Transicion){FIN_COMENTARIO_MULTIPLE, false};
 
     for(int c = 0; c < 256; c++) {
-        tablaDeTransicion[CADENA][c] = (Transicion){CADENA, true};
+        tablaDeTransiciones[FIN_COMENTARIO_MULTIPLE][c] = (Transicion){COMENTARIO_MULTIPLE, false};
     }
-    tablaDeTransicion[CADENA]['"'] = (Transicion){INICIAL, true};
-    tablaDeTransicion[CADENA]['\\'] = (Transicion){ESCAPE_EN_CADENA, true};
+    tablaDeTransiciones[FIN_COMENTARIO_MULTIPLE]['/'] = (Transicion){INICIAL, false};
 
-    for (int c = 0; c < 256; c++) {
-        tablaDeTransicion[ESCAPE_EN_CADENA][c] = (Transicion){CADENA, true};
+    for(int c = 0; c < 256; c++) {
+        tablaDeTransiciones[CADENA][c] = (Transicion){CADENA, true};
     }
-        
-    for (int c = 0; c < 256; c++) {
-        tablaDeTransicion[CARACTER][c] = (Transicion){CARACTER, true};
+    tablaDeTransiciones[CADENA]['"'] = (Transicion){INICIAL, true};
+    tablaDeTransiciones[CADENA]['\\'] = (Transicion){ESCAPE_EN_CADENA, true};
+
+    for(int c = 0; c < 256; c++) {
+        tablaDeTransiciones[ESCAPE_EN_CADENA][c] = (Transicion){CADENA, true};
     }
-    tablaDeTransicion[CARACTER]['\''] = (Transicion){INCIAL, true};
-    tablaDeTransicion[CARACTER]['\\'] = (Transicion){ESCAPE_EN_CARCATER, true};
-    
-     for (int c = 0; c < 256; c++) {
-        tablaDeTransicion[ESCAPE_EN_CARCTER][c] = (Transicion){CARCATER, true};
+
+    for(int c = 0; c < 256; c++) {
+        tablaDeTransiciones[CARACTER][c] = (Transicion){CARACTER, true};
+    }
+    tablaDeTransiciones[CARACTER]['\''] = (Transicion){INICIAL, true};
+    tablaDeTransiciones[CARACTER]['\\'] = (Transicion){ESCAPE_EN_CARACTER, true};
+
+    for(int c = 0; c < 256; c++) {
+        tablaDeTransiciones[ESCAPE_EN_CARACTER][c] = (Transicion){CARACTER, true};
     }
 }
 
 int main() {
     inicializarTabla();
-    Estado estadoActual = INCIAL;
+    Estado estadoActual = INICIAL;
     int caracter;
 
-    while((int caracter = getchar()) != EOF) {
+    while((caracter = getchar()) != EOF) {
         unsigned char uCaracter = (unsigned char)caracter;
-        Transicion trans = tablaDeTransicion[estadoActual][uCaracter];
 
+         if (estadoActual == BARRA && (caracter != '/' && caracter != '*')) {
+            putchar('/');  
+        }
+
+        Transicion trans = tablaDeTransiciones[estadoActual][uCaracter];
         estadoActual = trans.proximoEstado;
+
         if(trans.escribirChar) {
             putchar(caracter);
         }
     }
 
-    retur 0;
+    if (estadoActual == BARRA) {
+        putchar('/');
+    }
+
+    return 0;
 }
 
-#else 
+#else
 
-typedef enum {
-    INICIAL,
-    BARRA,
-    COMENTARIO_SIMPLE,
-    COMENTARIO_MULTIPLE,
-    FIN_COMENTARIO_MULTIPLE,
-    CADENA,
-    ESCAPE_EN_CADENA,
-    CARACTER,
-    ESCAPE_EN_CARACTER,
-    NUM_ESTADOS
-} Estado;
 
 int main(void){
     int c;
@@ -128,9 +128,9 @@ int main(void){
         }
         putchar(c);
         goto INICIAL;
-    
+
     BARRA:
-         c = getchar();
+        c = getchar();
         if (c == '/') goto COMENTARIO_SIMPLE;
         if (c == '*') goto COMENTARIO_MULTIPLE;
         putchar('/');
@@ -154,7 +154,7 @@ int main(void){
         c = getchar();
         if (c == EOF) goto END;
         if (c == '/') goto INICIAL;
-        if (c == '*') goto FIN_COMENTARIO_MULTIPLE; 
+        if (c == '*') goto FIN_COMENTARIO_MULTIPLE;
         goto COMENTARIO_MULTIPLE;
 
     CADENA:
@@ -190,4 +190,4 @@ int main(void){
 
 }
 
-#endif
+#endif 
