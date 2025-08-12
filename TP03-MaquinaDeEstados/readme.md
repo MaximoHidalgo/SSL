@@ -63,17 +63,17 @@ DD-SinComentarios
 └-- Makefile
 ```
 ## 📖 Diccionario
-Σ_i: ASCII
-Σ_0: {emitir, ignorar, ε, emitir / + caracter}
-Q: INICIAL, BARRA, COMENTARIO_SIMPLE, COMENTARIO_MULTIPLE, FIN_COMENTARIO_MULTIPLE, CADENA, ESCAPE_EN_CADENA, CARACTER, ESCAPE_EN_CARACTER,
+Σ_i: ASCII \
+Σ_0: {emitir, ignorar, ε, emitir / + caracter} \
+Q: INICIAL, BARRA, COMENTARIO_SIMPLE, COMENTARIO_MULTIPLE, FIN_COMENTARIO_MULTIPLE, CADENA, ESCAPE_EN_CADENA, CARACTER, ESCAPE_EN_CARACTER \
 
-B: /
-BI: \
-A: *
-CS: '
-CD: "
-\n: Nueva linea
-OC: Otro caracter
+B: / \
+BI: "\" \
+A: * \
+CS: ' \
+CD: " \
+\n: Nueva linea \
+OC: Otro caracter \
 
 ## 📅 Tabla de transicion
 <img width="1496" height="202" alt="TT" src="https://github.com/user-attachments/assets/9d79cf53-7066-4055-b1cf-3ab8f847a8e3" />
