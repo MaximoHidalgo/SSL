@@ -1,5 +1,4 @@
 #include <stdio.h>
-
 /* 
  * Comentario variasLineas colgado 1
  * Comentario variasLineas colgado 2
@@ -36,7 +35,6 @@ int main() {
 /* Comentario variasLineas colgado 4
  * ----------------
  */
-
 /* Repetimos mucho código para hacer el archivo grande */
 
 void funcionEjemplo() {
@@ -59,5 +57,4 @@ void funcionGrande() {
         funcionEjemplo();
     }
 }
-
 /* Comentario fin de archivo */
