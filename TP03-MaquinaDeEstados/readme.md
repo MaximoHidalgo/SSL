@@ -76,8 +76,11 @@ CD: "
 OC: Otro caracter
 
 ## 📅 Tabla de transicion
-             
-
+<img width="1496" height="202" alt="TT" src="https://github.com/user-attachments/assets/9d79cf53-7066-4055-b1cf-3ab8f847a8e3" />
+     
 ## 📅 Tabla de acciones
+<img width="790" height="202" alt="TA" src="https://github.com/user-attachments/assets/107d5324-7b30-499c-ab00-527e901455ac" />
+
+
 
 
