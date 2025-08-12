@@ -62,3 +62,22 @@ DD-SinComentarios
 │-- RemoveComments.c
 └-- Makefile
 ```
+## 📖 Diccionario
+Σ_i: ASCII
+Σ_0: {emitir, ignorar, ε, emitir / + caracter}
+Q: INICIAL, BARRA, COMENTARIO_SIMPLE, COMENTARIO_MULTIPLE, FIN_COMENTARIO_MULTIPLE, CADENA, ESCAPE_EN_CADENA, CARACTER, ESCAPE_EN_CARACTER,
+
+B: /
+BI: \
+A: *
+CS: '
+CD: "
+\n: Nueva linea
+OC: Otro caracter
+
+## 📅 Tabla de transicion
+             
+
+## 📅 Tabla de acciones
+
+

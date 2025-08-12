@@ -1,31 +1,31 @@
 digraph RemoveComments {
-    "INICIAL" -> "INICIAL" [label = "Caracter normal"];
-    "INICIAL" -> "BARRA" [label = "/"];
-    "INICIAL" -> "CADENA" [label = "\""];
-    "INICIAL" -> "CARACTER" [label = "'"];
+    "- INICIAL" -> "BARRA" [label = "B / emitir" ];
+    "- INICIAL" -> "CADENA" [label = "CD / emitir"];
+    "- INICIAL" -> "CARACTER" [label = "CS / emitir"];
+    "- INICIAL" -> "- INICIAL" [label = "OC / emitir"];
 
-    "BARRA" -> "COMENTARIO_SIMPLE" [label = "/"];
-    "BARRA" -> "COMENTARIO_MULTIPLE" [label = "*"];
-    "BARRA" -> "INICIAL" [label = "Cualquier caracter diferente de '/' o '*'"];
+    "BARRA" -> "COMENTARIO_SIMPLE" [label = "B / ε"];
+    "BARRA" -> "COMENTARIO_MULTIPLE" [label = "A / ε"];
+    "BARRA" -> "- INICIAL" [label = "OC / emitir B + caracter"];
 
-    "COMENTARIO_SIMPLE" -> "COMENTARIO_SIMPLE" [label = "No nueva linea"];
-    "COMENTARIO_SIMPLE" -> "INICIAL" [label = "Nueva linea"];
+    "COMENTARIO_SIMPLE" -> "- INICIAL" [label = "'\\n' / emitir"];
+    "COMENTARIO_SIMPLE" -> "COMENTARIO_SIMPLE" [label = "OC / ε"];
 
-    "COMENTARIO_MULTIPLE" -> "COMENTARIO_MULTIPLE" [label = "No '*'"];
-    "COMENTARIO_MULTIPLE" -> "FIN_COMENTARIO_MULTIPLE" [label = "'*'"];
+    "COMENTARIO_MULTIPLE" -> "FIN_COMENTARIO_MULTIPLE" [label = "A / ε"];
+    "COMENTARIO_MULTIPLE" -> "COMENTARIO_MULTIPLE" [label = "OC / ε"];
 
-    "FIN_COMENTARIO_MULTIPLE" -> "COMENTARIO_MULTIPLE" [label = "No '/'"];
-    "FIN_COMENTARIO_MULTIPLE" -> "INICIAL" [label = "'/'"];
+    "FIN_COMENTARIO_MULTIPLE" -> "- INICIAL" [label = "B / ε"];
+    "FIN_COMENTARIO_MULTIPLE" -> "COMENTARIO_MULTIPLE" [label = "OC / ε"];
 
-    "CADENA" -> "CADENA" [label = "No '\\' ni '\"'"];
-    "CADENA" -> "ESCAPE_EN_CADENA" [label = "'\\'"];
-    "CADENA" -> "INICIAL" [label = "\""];
+    "CADENA" -> "ESCAPE_EN_CADENA" [label = "BI / emitir"];
+    "CADENA" -> "- INICIAL" [label = "CD / emitir"];
+    "CADENA" -> "CADENA" [label = "OC / emitir"];
 
-    "ESCAPE_EN_CADENA" -> "CADENA" [label = "Cualquier caracter"];
+    "ESCAPE_EN_CADENA" -> "CADENA" [label = "OC / emitir"];
 
-    "CARACTER" -> "CARACTER" [label = "No '\\' ni '\\''"];
-    "CARACTER" -> "ESCAPE_EN_CARACTER" [label = "'\\'"];
-    "CARACTER" -> "INICIAL" [label = "'\\''"];
+    "CARACTER" -> "ESCAPE_EN_CARACTER" [label = "BI / emitir"];
+    "CARACTER" -> "- INICIAL" [label = "CS / emitir"];
+    "CARACTER" -> "CARACTER" [label = "OC / emitir"];
 
-    "ESCAPE_EN_CARACTER" -> "CARACTER" [label = "Cualquier caracter"];
+    "ESCAPE_EN_CARACTER" -> "CARACTER" [label = "OC / emitir"];
 }
