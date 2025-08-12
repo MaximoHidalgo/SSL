@@ -68,7 +68,7 @@ DD-SinComentarios
 Q: INICIAL, BARRA, COMENTARIO_SIMPLE, COMENTARIO_MULTIPLE, FIN_COMENTARIO_MULTIPLE, CADENA, ESCAPE_EN_CADENA, CARACTER, ESCAPE_EN_CARACTER \
 
 B: / \
-BI: '\' \
+BI: \\ \
 A: * \
 CS: ' \
 CD: " \
@@ -80,6 +80,7 @@ OC: Otro caracter
      
 ## 📅 Tabla de acciones
 <img width="790" height="202" alt="TA" src="https://github.com/user-attachments/assets/107d5324-7b30-499c-ab00-527e901455ac" />
+
 
 
 
