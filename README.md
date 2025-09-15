@@ -28,3 +28,5 @@
 ### *TP02-Interfaces*
 
 ### *TP03-MaquinaDeEstados*
+
+### *TP04-Escáner Léxico*

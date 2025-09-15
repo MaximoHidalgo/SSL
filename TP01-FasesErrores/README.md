@@ -14,6 +14,7 @@
 | María Florencia Bengoechea    | 213.505-0  | [mbengoechea](https://github.com/mbengoechea) |
 | Dylan Oriel Rechusky          | 203.301-0  | [DylanOriel](https://github.com/DylanOriel) |
 | Jeremías Boutet               | 208.705-4  | [Jereboutet](https://github.com/Jereboutet) |
+| Liam Karol Trepat             | 209.624-9  | [liamkaroltrepat](https://github.com/liamkaroltrepat) |
 
 ### 7.1. Objetivos
     Este trabajo tiene como objetivo identificar las fases del proceso de traducción o Build y los posibles 

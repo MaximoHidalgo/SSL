@@ -1,0 +1,38 @@
+digraph ScannerLexico {
+    rankdir=LR;
+    node [shape= box, fontname="Arial"];
+
+    PRINCIPIO [label="PRINCIPIO\n(salta espacios)"];
+    IDENT [label="IDENT\n(acumula A)"];
+    NUM   [label="NUM\n(acumula D)"];
+    EMIT_IDENT [label="emitir IDENTIFICADOR/KEYWORD"];
+    EMIT_NUM   [label="emitir LITERAL_NUMERICO"];
+    EMIT_OP    [label="emitir OPERADORES"];
+    EMIT_PUNCT [label="emitir PUNCTUATOR"];
+    EMIT_EOF   [label="emitir ENDFILE_TOKEN"];
+
+    // PRINCIPIO: consume espacios; clasifica primer char
+    PRINCIPIO -> PRINCIPIO [label="S / consumir"];
+    PRINCIPIO -> EMIT_EOF [label="EOF"];
+    PRINCIPIO -> IDENT [label="L / lexema ← c"];
+    PRINCIPIO -> NUM   [label="D / lexema ← c"];
+    PRINCIPIO -> EMIT_OP    [label="OP1 / lexema ← c"];
+    PRINCIPIO -> EMIT_PUNCT [label="; / lexema ← ';'"];
+    PRINCIPIO -> EMIT_PUNCT [label="OC / lexema ← c\n(token por defecto: PUNCTUATOR)"];
+
+    // IDENT: acumula A; al cortar, ungetc y decide KEYWORD/IDENT
+    IDENT -> IDENT [label="A / push(c)"];
+    IDENT -> EMIT_IDENT [label="OC o EOF / ungetc(c)\nfin lexema"];
+    // Nota: si EOF se leyera dentro, no hay ungetc; acción interna del código
+
+    // NUM: acumula D; al cortar, ungetc y emite número
+    NUM -> NUM [label="D / push(c)"];
+    NUM -> EMIT_NUM [label="OC o EOF / ungetc(c)\nfin lexema"];
+
+    // Emisiones: todos vuelven a PRINCIPIO para el siguiente token
+    EMIT_IDENT -> PRINCIPIO;
+    EMIT_NUM   -> PRINCIPIO;
+    EMIT_OP    -> PRINCIPIO;
+    EMIT_PUNCT -> PRINCIPIO;
+    EMIT_EOF   -> EMIT_EOF; // estado terminal lógico
+}
