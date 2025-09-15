@@ -1,0 +1,31 @@
+digraph RemoveComments {
+    "- INICIAL" -> "BARRA" [label = "B / emitir" ];
+    "- INICIAL" -> "CADENA" [label = "CD / emitir"];
+    "- INICIAL" -> "CARACTER" [label = "CS / emitir"];
+    "- INICIAL" -> "- INICIAL" [label = "OC / emitir"];
+
+    "BARRA" -> "COMENTARIO_SIMPLE" [label = "B / ε"];
+    "BARRA" -> "COMENTARIO_MULTIPLE" [label = "A / ε"];
+    "BARRA" -> "- INICIAL" [label = "OC / emitir B + caracter"];
+
+    "COMENTARIO_SIMPLE" -> "- INICIAL" [label = "'\\n' / emitir"];
+    "COMENTARIO_SIMPLE" -> "COMENTARIO_SIMPLE" [label = "OC / ε"];
+
+    "COMENTARIO_MULTIPLE" -> "FIN_COMENTARIO_MULTIPLE" [label = "A / ε"];
+    "COMENTARIO_MULTIPLE" -> "COMENTARIO_MULTIPLE" [label = "OC / ε"];
+
+    "FIN_COMENTARIO_MULTIPLE" -> "- INICIAL" [label = "B / ε"];
+    "FIN_COMENTARIO_MULTIPLE" -> "COMENTARIO_MULTIPLE" [label = "OC / ε"];
+
+    "CADENA" -> "ESCAPE_EN_CADENA" [label = "BI / emitir"];
+    "CADENA" -> "- INICIAL" [label = "CD / emitir"];
+    "CADENA" -> "CADENA" [label = "OC / emitir"];
+
+    "ESCAPE_EN_CADENA" -> "CADENA" [label = "OC / emitir"];
+
+    "CARACTER" -> "ESCAPE_EN_CARACTER" [label = "BI / emitir"];
+    "CARACTER" -> "- INICIAL" [label = "CS / emitir"];
+    "CARACTER" -> "CARACTER" [label = "OC / emitir"];
+
+    "ESCAPE_EN_CARACTER" -> "CARACTER" [label = "OC / emitir"];
+}

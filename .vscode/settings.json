@@ -61,7 +61,10 @@
     "stdio.h": "c",
     "assert.h": "c",
     "math.h": "c",
-    "stdbool.h": "c"
+    "stdbool.h": "c",
+    "ctype.h": "c",
+    "scanner.h": "c",
+    "string.h": "c"
   },
   "C_Cpp.errorSquiggles": "disabled"
 }
