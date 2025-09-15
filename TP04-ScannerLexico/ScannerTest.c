@@ -3,6 +3,20 @@
 #include <string.h>
 #include "Scanner.h"
 
+
+static const char* nombreToken(TokenType nombreToken) {
+    switch (nombreToken) {
+        case KEYWORD: return "KEYWORD";
+        case IDENTIFICADOR: return "IDENTIFICADOR";
+        case ESPACIO: return "ESPACIO";
+        case LITERAL_NUMERICO: return "LITERAL_NUMERICO";
+        case OPERADORES: return "OPERADORES";
+        case PUNCTUATOR: return "PUNCTUATOR";
+        case ENDFILE_TOKEN: return "ENDFILE_TOKEN";
+        default: return "???";
+    }
+}
+
 int main() {
     FILE* fp = fopen("codigo.txt", "r");
     if(fp == NULL){
@@ -11,22 +25,14 @@ int main() {
     }
 
     Token token;
-    token = GetNextToken(fp);
-    while(token.type != ENDFILE_TOKEN ) {
-        printf("Token: %-10s Tipo: %d\n", token.lexema, token.type);
+    do {
         token = GetNextToken(fp);
-    }
+        if (token.type == ENDFILE_TOKEN) break;
+
+        if (token.type != ESPACIO)
+            printf("%-16s '%s'\n", nombreToken(token.type), token.lexema);
+    } while (1);
+    if (fp != stdin) fclose(fp);
+
     return 0;
 }
-
-
-/*
-int main()
-{
-    TokenType token;
-    while ((token = getNextToken(FILE *)) != EOF){
-        printf("Token: %d\n", token);
-    }
-    return 0;
-}
-*/

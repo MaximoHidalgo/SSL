@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "Scanner.h"
+#include "Scanner.h"
 
 // Un analizador léxico que reconoce identificadores de tipo, 
 //números, punctuadores y operadores:
@@ -110,5 +111,4 @@ Token GetNextToken(FILE *fp){
             strcpy(tokenLeido.lexema, "desconocido");
             return tokenLeido;
     }
-    //return tokenLeido;
 }
