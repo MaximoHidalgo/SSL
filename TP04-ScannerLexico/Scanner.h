@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define LEXEMA_MAX 128
+
 typedef enum{
     KEYWORD,
     IDENTIFICADOR,
@@ -15,15 +17,10 @@ typedef enum{
 } TokenType;
 
 typedef struct {
-    TokenType type; // 0 1 2 3 4 5 6
-    char lexema[128]; //int x ; 
+    TokenType type; // 0 1 2 3 4 5 6 7
+    char lexema[LEXEMA_MAX]; //int x ; 
 } Token;
 
 Token GetNextToken (FILE*fp);
-int esLetra(int c);
-int esNumero(int c);
-int esAlfanumerico(int c);
-int esEspacio(int c);
-
 
 #endif

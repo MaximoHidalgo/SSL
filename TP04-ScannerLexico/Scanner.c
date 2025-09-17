@@ -7,6 +7,87 @@
 // Un analizador léxico que reconoce identificadores de tipo, 
 //números, punctuadores y operadores:
 
+int esLetra(int c);
+int esNumero(int c);
+int esAlfanumerico(int c);
+int esEspacio(int c);
+int esKeyword(const char* token);
+
+Token GetNextToken(FILE *file){
+    Token tokenLeido;
+    tokenLeido.lexema[0] = '\0';
+    int c;
+
+    do{c = fgetc(file);} while (c != EOF && esEspacio(c));
+
+    if (c == EOF){
+        tokenLeido.type = ENDFILE_TOKEN;
+        strcpy(tokenLeido.lexema, "EOF");
+        return tokenLeido;
+    }
+
+    if (esLetra(c)){
+        int i = 0;
+        if (i < LEXEMA_MAX-1) tokenLeido.lexema[i++] = (char)c;
+
+        while ((c = fgetc(file)) != EOF && esAlfanumerico(c)){
+            if (i < LEXEMA_MAX-1) tokenLeido.lexema[i++] = (char)c;
+        }
+        tokenLeido.lexema[i] = '\0';
+        if (c != EOF) ungetc(c, file);
+
+        if (esKeyword(tokenLeido.lexema)) {
+            tokenLeido.type = KEYWORD;
+        } else {
+            tokenLeido.type = IDENTIFICADOR;
+        }
+        return tokenLeido;
+    }
+
+    if (esNumero(c)){
+        int i = 0;
+        if (i < LEXEMA_MAX-1) tokenLeido.lexema[i++] = (char)c;
+
+        while ((c = fgetc(file)) != EOF && esNumero(c)){
+            if (i < LEXEMA_MAX-1) tokenLeido.lexema[i++] = (char)c;
+        }
+        tokenLeido.lexema[i] = '\0';
+        // consume número
+        if (c != EOF) ungetc(c, file);
+
+        tokenLeido.type = LITERAL_NUMERICO;
+        return tokenLeido;
+    }
+
+    switch (c) {
+        case '*':
+        case '(':
+        case ')':
+        case '[':
+        case ']':
+        {
+            tokenLeido.type = OPERADORES;
+            tokenLeido.lexema[0] = (char)c;
+            tokenLeido.lexema[1] = '\0';
+            return tokenLeido;
+        }
+        case ';':
+        {
+            tokenLeido.type = PUNCTUATOR;
+            tokenLeido.lexema[0] = (char)c;
+            tokenLeido.lexema[1] = '\0';
+            return tokenLeido;
+        }
+        default:
+        {
+            tokenLeido.type = ERROR;
+            tokenLeido.lexema[0] = (char)c;
+            tokenLeido.lexema[1] = '\0';
+            return tokenLeido;
+        }
+    }
+}
+
 // Retorna true si es letra (A-Z o a-z)
 int esLetra(int c){
     return ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || (c == '_'));
@@ -32,83 +113,7 @@ int esEspacio(int c){
             c == '\r');  // retorno de carro
 }
 
-Token GetNextToken(FILE *file){
-
-    Token tokenLeido;
-    int c;
-
-    do{c = fgetc(file);} while (c != EOF && esEspacio(c));
-
-    if (c == EOF){
-        tokenLeido.type = ENDFILE_TOKEN;
-        strcpy(tokenLeido.lexema, "EOF");
-        return tokenLeido;
-    }
-
-    if (esLetra(c)){
-        int i = 0;
-        tokenLeido.lexema[i++] = c;
-        while ((c = fgetc(file)) != EOF && esAlfanumerico(c)){
-            tokenLeido.lexema[i++] = c;
-        }
-        tokenLeido.lexema[i] = '\0';
-        if (c != EOF) ungetc(c, file);
-
-            // consume identificador
-        if (strcmp(tokenLeido.lexema, "int") == 0 ||
-            strcmp(tokenLeido.lexema, "char") == 0 ||
-            strcmp(tokenLeido.lexema, "void") == 0 ||
-            strcmp(tokenLeido.lexema, "double") == 0 ||
-            strcmp(tokenLeido.lexema, "float") == 0){
-            tokenLeido.type = KEYWORD;
-        } else{
-                tokenLeido.type = IDENTIFICADOR;
-            }
-            return tokenLeido;
-        }
-
-    if (esNumero(c)){
-        int i = 0;
-        tokenLeido.lexema[i++] = c;
-        while (((c = fgetc(file)) != EOF) && esNumero(c)){
-            tokenLeido.lexema[i++] = c;
-        }
-        tokenLeido.lexema[i] = '\0';
-        // consume número
-        if (c != EOF) ungetc(c, file);
-        tokenLeido.type = LITERAL_NUMERICO;
-        return tokenLeido;
-    }
-
-    switch(c) {
-        case ';':
-            tokenLeido.type = PUNCTUATOR;
-            strcpy(tokenLeido.lexema, ";");
-            return tokenLeido;
-        case '(':
-            tokenLeido.type = OPERADORES;
-            strcpy(tokenLeido.lexema, "(");
-            return tokenLeido;
-        case ')':
-            tokenLeido.type = OPERADORES;
-            strcpy(tokenLeido.lexema, ")");
-            return tokenLeido;
-        case '[':
-            tokenLeido.type = OPERADORES;
-            strcpy(tokenLeido.lexema, "[");
-            return tokenLeido;
-        case ']':
-            tokenLeido.type = OPERADORES;
-            strcpy(tokenLeido.lexema, "]");
-            return tokenLeido;
-        case '*':
-            tokenLeido.type = OPERADORES;
-            strcpy(tokenLeido.lexema, "*");
-            return tokenLeido;
-
-        default:
-            tokenLeido.type = ERROR;
-            strcpy(tokenLeido.lexema, "desconocido");
-            return tokenLeido;
-    }
+int esKeyword(const char* token){
+    return strcmp(token,"int")==0 || strcmp(token,"char")==0 || strcmp(token,"void")==0 ||
+           strcmp(token,"double")==0 || strcmp(token,"float")==0;
 }
