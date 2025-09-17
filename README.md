@@ -2,7 +2,7 @@
 
 ## 📚 Sintaxis y Semántica de los Lenguajes - Año 2025  
 **Curso:** K2002  
-**Equipo N.º 2:** *Sintax Error*
+**Equipo Nº 2:** *Sintax Error*
 
 ---
 

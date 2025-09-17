@@ -1,7 +1,16 @@
-# TP2 - Interfaces & Makefile - Temperaturas
+<p align="center">
+  <span style="color:violet; font-size:35px; font-weight:bold;">
+    💻𝓣𝓟𝟚 - 𝓘𝓷𝓽𝓮𝓻𝓯𝓪𝓬𝓮𝓼 & 𝓜𝓪𝓴𝓮𝓯𝓲𝓵𝓮 - 𝓣𝓮𝓶𝓹𝓮𝓻𝓪𝓽𝓾𝓻𝓪𝓼💻
+  </span>
+</p>
 
-#### Equipo N.º 2: *"Sintax Error"*
+  --- ---
 
+<p align="center">
+<img src="https://images.icon-icons.com/1377/PNG/512/textxmakefile_92756.png" width="300"/>
+</p>
+
+### Equipo Nº 2: *"Sintax Error"*
 
 ## 👥 Autores de la resolución:
 

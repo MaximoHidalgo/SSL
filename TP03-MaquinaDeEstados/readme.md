@@ -1,7 +1,16 @@
-# TP3 - Máquinas de Estado — Sin Comentarios
+<p align="center">
+  <span style="color:deepskyblue; font-size:35px; font-weight:bold;">
+    🤖𝓣𝓟𝟛 - 𝓜𝓪𝓺𝓾𝓲𝓷𝓪𝓼 𝓭𝓮 𝓔𝓼𝓽𝓪𝓭𝓸 — 𝓢𝓲𝓷 𝓒𝓸𝓶𝓮𝓷𝓽𝓪𝓻𝓲𝓸𝓼🤖
+  </span>
+</p>
 
-#### Equipo N.º 2: *"Sintax Error"*
+  --- ---
 
+<p align="center">
+<img src="https://miro.medium.com/v2/resize:fit:640/1*41LSikhXWH13HPCv3isiqA.png" width="300"/>
+</p>
+
+### Equipo Nº 2: *"Sintax Error"*
 
 ## 👥 Autores de la resolución:
 
@@ -77,10 +86,16 @@ CD: " \
 OC: Otro caracter 
 
 ## 📅 Tabla de transicion
+<div style="background-color:white; padding:10px; display:inline-block;">
 <img width="1496" height="202" alt="TT" src="https://github.com/user-attachments/assets/9d79cf53-7066-4055-b1cf-3ab8f847a8e3" />
+</div>
      
 ## 📅 Tabla de acciones
+<div style="background-color:white; padding:10px; display:inline-block;">
 <img width="790" height="202" alt="TA" src="https://github.com/user-attachments/assets/107d5324-7b30-499c-ab00-527e901455ac" />
+</div>
+
+
 
 
 

@@ -1,5 +1,17 @@
-# TP1 - Fases de la Traducción y Errores
-**Equipo N.º 2:** *"Sintax Error"*
+<p align="center">
+  <span style="color:violet; font-size:35px; font-weight:bold;">
+    💬𝓣𝓟𝟙 - 𝓕𝓪𝓼𝓮𝓼 𝓭𝓮 𝓵𝓪 𝓣𝓻𝓪𝓭𝓾𝓬𝓬𝓲𝓸𝓷 𝔂 𝓔𝓻𝓻𝓸𝓻𝓮𝓼💬
+  </span>
+</p>
+
+  --- ---
+
+<p align="center">
+<img src="https://camo.githubusercontent.com/48dbbfd0a418422b4d76e9f20de8a3b55e0e81f4ada6b05d3b8ed5bea2df62f6/68747470733a2f2f7061312e6e61727669692e636f6d2f363538302f383039386336653932303733373638383965656230353332643966356130373233633464373366355f68712e676966" width="300"/>
+</p>
+
+
+### Equipo Nº 2: *"Sintax Error"*
 
 ---
 
