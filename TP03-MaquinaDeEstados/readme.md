@@ -80,15 +80,33 @@ CD: " \
 OC: Otro caracter 
 
 ## 📅 Tabla de transicion
-<div style="background-color:white; padding:10px; display:inline-block;">
-<img width="1496" height="202" alt="TT" src="https://github.com/user-attachments/assets/9d79cf53-7066-4055-b1cf-3ab8f847a8e3" />
-</div>
+
+| TT                   | B                  | BI                     | A                      | CS        | CD        | \n        | OC        |
+|-----------------------|--------------------|------------------------|------------------------|-----------|-----------|-----------|-----------|
+| INICIAL              | BARRA              | INICIAL                | INICIAL                | CARÁCTER  | CADENA    | INICIAL   | INICIAL   |
+| BARRA                | COMENTARIO_SIMPLE  | INICIAL                | COMENTARIO_MULTIPLE    | INICIAL   | INICIAL   | INICIAL   | INICIAL   |
+| COMENTARIO_SIMPLE    | COMENTARIO_SIMPLE  | COMENTARIO_SIMPLE      | COMENTARIO_SIMPLE      | COMENTARIO_SIMPLE | COMENTARIO_SIMPLE | INICIAL   | COMENTARIO_SIMPLE |
+| COMENTARIO_MULTIPLE  | COMENTARIO_MULTIPLE| COMENTARIO_MULTIPLE    | FIN_COMENTARIO_MULTIPLE| COMENTARIO_MULTIPLE | COMENTARIO_MULTIPLE | COMENTARIO_MULTIPLE | COMENTARIO_MULTIPLE |
+| FIN_COMENTARIO_MULTIPLE | INICIAL          | FIN_COMENTARIO_MULTIPLE| FIN_COMENTARIO_MULTIPLE| FIN_COMENTARIO_MULTIPLE | FIN_COMENTARIO_MULTIPLE | FIN_COMENTARIO_MULTIPLE | FIN_COMENTARIO_MULTIPLE |
+| CADENA               | CADENA             | ESCAPE_EN_CADENA       | CADENA                 | CADENA    | INICIAL   | CADENA    | CADENA    |
+| ESCAPE_EN_CADENA     | CADENA             | CADENA                 | CADENA                 | CADENA    | CADENA    | CADENA    | CADENA    |
+| CARÁCTER             | CARÁCTER           | ESCAPE_EN_CARACTER     | CARÁCTER               | INICIAL   | CARÁCTER  | CARÁCTER  | CARÁCTER  |
+| ESCAPE_EN_CARACTER   | CARÁCTER           | CARÁCTER               | CARÁCTER               | CARÁCTER  | CARÁCTER  | CARÁCTER  | CARÁCTER  |
+
      
 ## 📅 Tabla de acciones
-<div style="background-color:white; padding:10px; display:inline-block;">
-<img width="790" height="202" alt="TA" src="https://github.com/user-attachments/assets/107d5324-7b30-499c-ab00-527e901455ac" />
-</div>
 
+| TA                   | B       | BI      | A       | CS      | CD      | \n     | OC                  |
+|-----------------------|---------|---------|---------|---------|---------|--------|---------------------|
+| INICIAL              | emitir  | emitir  | emitir  | emitir  | emitir  | emitir | emitir              |
+| BARRA                | ε       | emitir  | emitir  | emitir  | emitir  | emitir | emitir B + carácter |
+| COMENTARIO_SIMPLE    | emitir  | emitir  | emitir  | emitir  | emitir  | emitir | ε                   |
+| COMENTARIO_MULTIPLE  | emitir  | emitir  | emitir  | emitir  | emitir  | emitir | ε                   |
+| FIN_COMENTARIO_MULTIPLE | ε     | emitir  | emitir  | emitir  | emitir  | emitir | ε                   |
+| CADENA               | emitir  | emitir  | emitir  | emitir  | emitir  | emitir | emitir              |
+| ESCAPE_EN_CADENA     | emitir  | emitir  | emitir  | emitir  | emitir  | emitir | emitir              |
+| CARÁCTER             | emitir  | emitir  | emitir  | emitir  | emitir  | emitir | emitir              |
+| ESCAPE_EN_CARACTER   | emitir  | emitir  | emitir  | emitir  | emitir  | emitir | emitir              |
 
 
 

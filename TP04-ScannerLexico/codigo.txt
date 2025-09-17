@@ -3,4 +3,3 @@ float y123;
 char nombre;
 void funcion(int parametro);
 void funcion[];
-

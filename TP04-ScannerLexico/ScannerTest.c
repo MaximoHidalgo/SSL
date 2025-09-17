@@ -13,26 +13,21 @@ static const char* nombreToken(TokenType nombreToken) {
         case OPERADORES: return "OPERADORES";
         case PUNCTUATOR: return "PUNCTUATOR";
         case ENDFILE_TOKEN: return "ENDFILE_TOKEN";
+        case ERROR: return "desconocido";
         default: return "???";
     }
 }
 
 int main() {
-    FILE* fp = fopen("codigo.txt", "r");
-    if(fp == NULL){
+    FILE* file = fopen("codigo.txt", "r");
+    if(file == NULL){
         perror("Error al abrir el archivo");
         return 1;
     }
 
-    Token token;
-    do {
-        token = GetNextToken(fp);
-        if (token.type == ENDFILE_TOKEN) break;
-
-        if (token.type != ESPACIO)
-            printf("%-16s '%s'\n", nombreToken(token.type), token.lexema);
-    } while (1);
-    if (fp != stdin) fclose(fp);
-
-    return 0;
+    for (Token token = GetNextToken(file); token.type != ENDFILE_TOKEN; token = GetNextToken(file)) {
+    if (token.type != ESPACIO)
+        printf("%-16s '%s'\n", nombreToken(token.type), token.lexema);
+    }
+    if (file != stdin) fclose(file);
 }

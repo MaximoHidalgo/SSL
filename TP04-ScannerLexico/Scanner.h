@@ -11,6 +11,7 @@ typedef enum{
     OPERADORES,
     PUNCTUATOR,
     ENDFILE_TOKEN,
+    ERROR,
 } TokenType;
 
 typedef struct {

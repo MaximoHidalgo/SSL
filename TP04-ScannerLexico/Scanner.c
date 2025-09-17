@@ -32,12 +32,12 @@ int esEspacio(int c){
             c == '\r');  // retorno de carro
 }
 
-Token GetNextToken(FILE *fp){
+Token GetNextToken(FILE *file){
 
     Token tokenLeido;
     int c;
 
-    do{c = fgetc(fp);} while (c != EOF && esEspacio(c));
+    do{c = fgetc(file);} while (c != EOF && esEspacio(c));
 
     if (c == EOF){
         tokenLeido.type = ENDFILE_TOKEN;
@@ -48,11 +48,11 @@ Token GetNextToken(FILE *fp){
     if (esLetra(c)){
         int i = 0;
         tokenLeido.lexema[i++] = c;
-        while ((c = fgetc(fp)) != EOF && esAlfanumerico(c)){
+        while ((c = fgetc(file)) != EOF && esAlfanumerico(c)){
             tokenLeido.lexema[i++] = c;
         }
         tokenLeido.lexema[i] = '\0';
-        if (c != EOF) ungetc(c, fp);
+        if (c != EOF) ungetc(c, file);
 
             // consume identificador
         if (strcmp(tokenLeido.lexema, "int") == 0 ||
@@ -70,12 +70,12 @@ Token GetNextToken(FILE *fp){
     if (esNumero(c)){
         int i = 0;
         tokenLeido.lexema[i++] = c;
-        while (((c = fgetc(fp)) != EOF) && esNumero(c)){
+        while (((c = fgetc(file)) != EOF) && esNumero(c)){
             tokenLeido.lexema[i++] = c;
         }
         tokenLeido.lexema[i] = '\0';
         // consume número
-        if (c != EOF) ungetc(c, fp);
+        if (c != EOF) ungetc(c, file);
         tokenLeido.type = LITERAL_NUMERICO;
         return tokenLeido;
     }
@@ -107,7 +107,7 @@ Token GetNextToken(FILE *fp){
             return tokenLeido;
 
         default:
-            tokenLeido.type = PUNCTUATOR;
+            tokenLeido.type = ERROR;
             strcpy(tokenLeido.lexema, "desconocido");
             return tokenLeido;
     }
