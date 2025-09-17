@@ -1,10 +1,4 @@
-<p align="center">
-  <span style="color:gold; font-size:35px; font-weight:bold;">
-    🔍𝓣𝓟𝟜 𝓔𝓼𝓬𝓪𝓷𝓮𝓻 𝓛𝓮𝔁𝓲𝓬𝓸🔎
-  </span>
-</p>
-
-  --- ---
+# 🔍𝓣𝓟𝟜 𝓔𝓼𝓬𝓪𝓷𝓮𝓻 𝓛𝓮𝔁𝓲𝓬𝓸🔎
 
 <p align="center">
 <img src="https://cdn.dribbble.com/userupload/25126157/file/original-b4e375e11656bdb2c9aec5333f82acaa.gif" alt="Escáner animado" width="300"/>
@@ -166,11 +160,7 @@ Este escáner léxico reconoce una serie de **tokens** básicos y asocia cada un
 ### 💻 Diagrama de la Maquina de Estados
 
 El diseño de la Máquina de Estados está en el archivo  
-`automataScanner.gv`
-
-Enlace directo para ver el grafo DOT e interactuar con él:  
-👉 [Visualizar el Grafo DOT](./assets/automataFinitoScanner.svg)
-
+`automataScanner.gv` y se puede visualizar en "Free Graphviz / Dot online editor"
 
 ## 🧮 Especificación en Expresiones Regulares (RegEx)
 

@@ -1,10 +1,5 @@
-<p align="center">
-  <span style="color:violet; font-size:35px; font-weight:bold;">
-    💻𝓣𝓟𝟚 - 𝓘𝓷𝓽𝓮𝓻𝓯𝓪𝓬𝓮𝓼 & 𝓜𝓪𝓴𝓮𝓯𝓲𝓵𝓮 - 𝓣𝓮𝓶𝓹𝓮𝓻𝓪𝓽𝓾𝓻𝓪𝓼💻
-  </span>
-</p>
+# 💻𝓣𝓟𝟚 - 𝓘𝓷𝓽𝓮𝓻𝓯𝓪𝓬𝓮𝓼 & 𝓜𝓪𝓴𝓮𝓯𝓲𝓵𝓮 - 𝓣𝓮𝓶𝓹𝓮𝓻𝓪𝓽𝓾𝓻𝓪𝓼💻
 
-  --- ---
 
 <p align="center">
 <img src="https://images.icon-icons.com/1377/PNG/512/textxmakefile_92756.png" width="300"/>

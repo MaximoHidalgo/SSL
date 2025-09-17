@@ -1,10 +1,4 @@
-<p align="center">
-  <span style="color:deepskyblue; font-size:35px; font-weight:bold;">
-    🤖𝓣𝓟𝟛 - 𝓜𝓪𝓺𝓾𝓲𝓷𝓪𝓼 𝓭𝓮 𝓔𝓼𝓽𝓪𝓭𝓸 — 𝓢𝓲𝓷 𝓒𝓸𝓶𝓮𝓷𝓽𝓪𝓻𝓲𝓸𝓼🤖
-  </span>
-</p>
-
-  --- ---
+# 🤖𝓣𝓟𝟛 - 𝓜𝓪𝓺𝓾𝓲𝓷𝓪𝓼 𝓭𝓮 𝓔𝓼𝓽𝓪𝓭𝓸 — 𝓢𝓲𝓷 𝓒𝓸𝓶𝓮𝓷𝓽𝓪𝓻𝓲𝓸𝓼🤖
 
 <p align="center">
 <img src="https://miro.medium.com/v2/resize:fit:640/1*41LSikhXWH13HPCv3isiqA.png" width="300"/>
