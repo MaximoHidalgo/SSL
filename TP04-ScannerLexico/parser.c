@@ -24,7 +24,7 @@ void parser(FILE *file) {
 
     while (tokenActual.type != ENDFILE_TOKEN) {
         declaracion();
-        tokenActual = GetNextToken(source);
+        //tokenActual = GetNextToken(source);
     }
     printf("\nAnalisis sintactico completado correctamente\n");
 }
@@ -77,7 +77,7 @@ void resto(const char *tipo, const char *identificador) {
             strcpy(tamanio, tokenActual.lexema);
             match(LITERAL_NUMERICO);
         } else {
-            errorSintactico("número");
+            errorSintactico("numero"); // se esperaba numero
         }
         matchLexema(OPERADORES, "]");
         printf("%s es un arreglo de %s elementos de tipo %s\n", identificador, tamanio, traducirTipo(tipo)); // caso 2: tipo identificador [tamanio] punto-coma 
@@ -144,6 +144,6 @@ void errorSintactico(const char *esperado) {
         printf("\nAnalisis sintactico completado correctamente\n");
         exit(EXIT_SUCCESS);
     }
-    fprintf(stderr, "Error sintactico: se esperaba %s, se encontro '%s'\n", esperado, tokenActual.lexema);
+    fprintf(stderr, "Error sintactico: se esperaba %s, se encontro '%s', no se completa el analisis sintactico hasta que se corrija\n", esperado, tokenActual.lexema);
     exit(EXIT_FAILURE);
 }
