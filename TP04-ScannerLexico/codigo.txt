@@ -1,41 +1,39 @@
 int x;
 int i;
-int a[10];
 int *p;
 int f();
-double matriz[10];
 char c;
+char ************************************************argv;
 float y123;
 char nombre;
 void funcion(int parametro);
 int *fp();
 float a1;
-
-void funcion[];
-
-
-// tipo  tipo-n-punteros fp
-
 int (*pf)();
 void *comp(); 
 void (*comp)();
-char **********************************************************************************argv;
-int daytab[13];
-int (*daytab)[13];
-int *daytab[13];
+
 char (*(*x())[])();
 char (*(*x[3])())[5];
 
+void funcion[];
+int a[10];
+double matriz[10];
+int daytab[13];
+int (*daytab)[13];
+int *daytab[13];
+
+//fp: fp es funcion que retorna puntero a int
+//pf: pf es puntero a una funcion que retorna un int 
+//comp: comp es funcion que retorna puntero a void
+//comp: comp es puntero a una funcion que retorna un void 
+//argv: argv es puntero a  un puntero a char 
+//daytab: daytab es un arreglo de 13 int
+//daytab: daytab es un puntero a un arreglo de 13 int
+//daytab: daytab es un arreglo de 13 punteros a int
+//x: x es una funcion que retorna un puntero a un arreglo de punteros a una funcion que retorna un char
+//x: x es un arreglo de 3 punteros a una funcion que retorna un puntero a un arreglo de 5 chars
 
 
 
-//fp: function returning pointer to int
-//pf: pointer to function returning int
-//comp: function returning pointer to void
-//comp: pointer to function returning void
-//argv: pointer to pointer to char
-//daytab: array[13] of int
-//daytab: pointer to array[13] of int
-//daytab: array[13] of pointer to int
-//x: function returning pointer to array[] of pointer to function returning char
-//x: array[3] of pointer to function returning pointer to array[5] of char.
+// tipo  tipo-n-punteros fp
