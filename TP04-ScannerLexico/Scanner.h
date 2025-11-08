@@ -23,6 +23,7 @@ typedef struct {
 
 Token GetNextToken (FILE*fp);
 void parser(FILE *file);
+const char* nombreToken(TokenType nombreToken);
 
 
 #endif

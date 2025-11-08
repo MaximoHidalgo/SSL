@@ -4,7 +4,7 @@
 #include "Scanner.h"
 
 
-static const char* nombreToken(TokenType nombreToken) {
+const char* nombreToken(TokenType nombreToken) {
     switch (nombreToken) {
         case KEYWORD: return "KEYWORD";
         case IDENTIFICADOR: return "IDENTIFICADOR";
@@ -25,11 +25,6 @@ int main() {
         return 1;
     }
 
-/*for (Token token = GetNextToken(file); token.type != ENDFILE_TOKEN; token = GetNextToken(file)) {
-    if (token.type != ESPACIO)
-        printf("%-16s '%s'\n", nombreToken(token.type), token.lexema);
-    }*/
-    
     parser(file);
     if (file != stdin) fclose(file);
 }
