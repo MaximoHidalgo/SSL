@@ -22,5 +22,7 @@ typedef struct {
 } Token;
 
 Token GetNextToken (FILE*fp);
+void parser(FILE *file);
+
 
 #endif

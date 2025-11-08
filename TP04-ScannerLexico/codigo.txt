@@ -1,5 +1,8 @@
 int x;
+double matriz[10];
+char c;
 float y123;
 char nombre;
 void funcion(int parametro);
 void funcion[];
+float a1;

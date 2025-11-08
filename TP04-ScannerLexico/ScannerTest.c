@@ -25,9 +25,11 @@ int main() {
         return 1;
     }
 
-    for (Token token = GetNextToken(file); token.type != ENDFILE_TOKEN; token = GetNextToken(file)) {
+/*for (Token token = GetNextToken(file); token.type != ENDFILE_TOKEN; token = GetNextToken(file)) {
     if (token.type != ESPACIO)
         printf("%-16s '%s'\n", nombreToken(token.type), token.lexema);
-    }
+    }*/
+    
+    parser(file);
     if (file != stdin) fclose(file);
 }
