@@ -1,0 +1,3 @@
+int x;
+int i;
+int *p;

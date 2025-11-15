@@ -1,5 +1,6 @@
 #ifndef SCANNER_H
 #define SCANNER_H
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -12,13 +13,14 @@ typedef enum{
     LITERAL_NUMERICO,
     OPERADORES,
     PUNCTUATOR,
-    ENDFILE_TOKEN,
-    ERROR,
 } TokenType;
 
 
 
-typedef struct {
+
+
+
+typedef struct Token {
     TokenType type; // 0 1 2 3 4 5 6 7
     char lexema[LEXEMA_MAX]; //int x ; 
 } Token;
@@ -34,7 +36,10 @@ typedef struct NodoTipo {
 }NodoTipo;
 
 
-Token GetNextToken (FILE*fp);
+extern const char* TokenTypeNames[];
+
+
+bool GetNextToken(Token* tokenLeido);
 
 void parser(FILE *file);
 const char* nombreToken(TokenType nombreToken);

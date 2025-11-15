@@ -12,77 +12,80 @@ int esAlfanumerico(int c);
 int esEspacio(int c);
 int esKeyword(const char* token);
 
-Token GetNextToken(FILE *file){
-    Token tokenLeido;
-    tokenLeido.lexema[0] = '\0';
+bool GetNextToken(Token* tokenLeido){
+    tokenLeido->lexema[0] = '\0';
     int c;
 
-    do{c = fgetc(file);} while (c != EOF && esEspacio(c));
+    // saltar espacion si hay
+    do{c = getchar();} while (c != EOF && esEspacio(c));
 
-    if (c == EOF){
-        tokenLeido.type = ENDFILE_TOKEN;
-        strcpy(tokenLeido.lexema, "EOF");
-        return tokenLeido;
+    if (c == EOF){ 
+        fprintf(stderr, "Info: EOF\n");
+        return false;
     }
 
     if (esLetra(c)){
         int i = 0;
-        if (i < LEXEMA_MAX-1) tokenLeido.lexema[i++] = (char)c;
+        tokenLeido->lexema[i++] = (char)c; // tokenLeido->lexema[0] = c; y i++ dsp
 
-        while ((c = fgetc(file)) != EOF && esAlfanumerico(c)){
-            if (i < LEXEMA_MAX-1) tokenLeido.lexema[i++] = (char)c;
+        while ((c = getchar()) != EOF && esAlfanumerico(c)){
+            if (i < LEXEMA_MAX-1) tokenLeido->lexema[i++] = (char)c;
+            else fprintf(stderr, "Advertencia: token demasiado largo, truncado\n");
         }
-        tokenLeido.lexema[i] = '\0';
-        if (c != EOF) ungetc(c, file);
+        tokenLeido->lexema[i] = '\0';
+        if (c != EOF) ungetc(c, stdin);
 
-        if (esKeyword(tokenLeido.lexema)) {
-            tokenLeido.type = KEYWORD;
+        if (esKeyword(tokenLeido->lexema)) {
+            tokenLeido->type = KEYWORD;
         } else {
-            tokenLeido.type = IDENTIFICADOR;
+            tokenLeido->type = IDENTIFICADOR;
         }
-        return tokenLeido;
+        return true;
     }
 
-    if (esNumero(c)){
+    if (esNumero(c)){ 
         int i = 0;
-        if (i < LEXEMA_MAX-1) tokenLeido.lexema[i++] = (char)c;
+        if (i < LEXEMA_MAX-1) tokenLeido->lexema[i++] = (char)c;
 
-        while ((c = fgetc(file)) != EOF && esNumero(c)){
-            if (i < LEXEMA_MAX-1) tokenLeido.lexema[i++] = (char)c;
+        while ((c = getchar()) != EOF && esNumero(c)){
+            if (i < LEXEMA_MAX-1) tokenLeido->lexema[i++] = (char)c;
         }
-        tokenLeido.lexema[i] = '\0';
-        // consume número
-        if (c != EOF) ungetc(c, file);
+        tokenLeido->lexema[i] = '\0';
 
-        tokenLeido.type = LITERAL_NUMERICO;
-        return tokenLeido;
+        if (esLetra(c)) {
+            fprintf(stderr, "Error léxico: número seguido de letra, teniamos: %s y llego '%c'\n",tokenLeido->lexema, c);
+            while ((c = getchar()) != EOF && esAlfanumerico(c)); // consumo resto del identificador corrupto y roto
+            if (c != EOF) ungetc(c, stdin);
+            return false;
+        }
+        if (c != EOF) ungetc(c, stdin); // no vino letra vino otra cosa 
+        tokenLeido->type = LITERAL_NUMERICO;
+        return true;
     }
 
-    switch (c) {
-        case '*':
+    switch (c) { // OPERADORES Y PUNRUACTORS
+        case '*': // char es un numero difrazado
         case '(':
         case ')':
         case '[':
         case ']':
         {
-            tokenLeido.type = OPERADORES;
-            tokenLeido.lexema[0] = (char)c;
-            tokenLeido.lexema[1] = '\0';
-            return tokenLeido;
+            tokenLeido->type = OPERADORES;
+            tokenLeido->lexema[0] = (char)c;
+            tokenLeido->lexema[1] = '\0';
+            return true;
         }
         case ';':
         {
-            tokenLeido.type = PUNCTUATOR;
-            tokenLeido.lexema[0] = (char)c;
-            tokenLeido.lexema[1] = '\0';
-            return tokenLeido;
+            tokenLeido->type = PUNCTUATOR;
+            tokenLeido->lexema[0] = (char)c; // ;
+            tokenLeido->lexema[1] = '\0';
+            return true;
         }
         default:
         {
-            tokenLeido.type = ERROR;
-            tokenLeido.lexema[0] = (char)c;
-            tokenLeido.lexema[1] = '\0';
-            return tokenLeido;
+            fprintf(stderr, "Error léxico: carácter inesperado '%c'\n", c);
+            return false;
         }
     }
 }
@@ -116,3 +119,5 @@ int esKeyword(const char* token){
     return strcmp(token,"int")==0 || strcmp(token,"char")==0 || strcmp(token,"void")==0 ||
            strcmp(token,"double")==0 || strcmp(token,"float")==0;
 }
+
+const char* TokenTypeNames[] = {"KEYWORD", "IDENTIFICADOR", "ESPACIO", "LITERAL_NUMERICO", "OPERADORES", "PUNCTUATOR"};
