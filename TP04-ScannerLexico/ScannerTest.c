@@ -27,8 +27,9 @@ int main() {
     //    perror("Error al abrir el archivo");
     //    return 1;
     //}
-        Token tk;
-        while(GetNextToken(&tk)) printToken(tk);
+        //Token tk;
+        parser();
+        //while(GetNextToken(&tk)) printToken(tk);
 
     //parser(file);
    // if (file != stdin) fclose(file);

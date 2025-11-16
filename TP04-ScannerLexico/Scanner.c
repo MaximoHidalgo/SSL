@@ -3,8 +3,7 @@
 #include <string.h>
 #include "Scanner.h"
 
-// Un analizador léxico que reconoce identificadores de tipo, 
-//números, punctuadores y operadores:
+
 
 int esLetra(int c);
 int esNumero(int c);
@@ -64,21 +63,21 @@ bool GetNextToken(Token* tokenLeido){
     }
 
     switch (c) { // OPERADORES Y PUNRUACTORS
-        case '*': // char es un numero difrazado
+        case ';': // char es un numero difrazado
         case '(':
         case ')':
         case '[':
         case ']':
         {
-            tokenLeido->type = OPERADORES;
+            tokenLeido->type = PUNCTUATOR;
             tokenLeido->lexema[0] = (char)c;
             tokenLeido->lexema[1] = '\0';
             return true;
         }
-        case ';':
+        case '*':
         {
-            tokenLeido->type = PUNCTUATOR;
-            tokenLeido->lexema[0] = (char)c; // ;
+            tokenLeido->type = OPERADORES;
+            tokenLeido->lexema[0] = (char)c; // 
             tokenLeido->lexema[1] = '\0';
             return true;
         }

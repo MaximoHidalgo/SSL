@@ -6,7 +6,7 @@
 
 #define LEXEMA_MAX 128
 
-typedef enum{
+typedef enum TokenType{
     KEYWORD,
     IDENTIFICADOR,
     ESPACIO,
@@ -18,7 +18,7 @@ typedef enum{
 
 
 
-
+int main_parser_loop(void);
 
 typedef struct Token {
     TokenType type; // 0 1 2 3 4 5 6 7
@@ -28,12 +28,13 @@ typedef struct Token {
 
 typedef enum {T_BASE, T_PUNTERO, T_ARREGLO, T_FUNCION} TipoNodo;
 
+
 typedef struct NodoTipo {
     TipoNodo tipo;
-    int dimensiones;      // arreglos
-    char parametros[256]; // funciones
-    struct NodoTipo *sig; 
-}NodoTipo;
+    int dimensiones;          // para arrays
+    struct NodoTipo* sig;     // para la lista de punteros/arrays/funciones
+    char parametros[256];     // lista de parámetros si es función
+} NodoTipo;
 
 
 extern const char* TokenTypeNames[];
@@ -41,7 +42,7 @@ extern const char* TokenTypeNames[];
 
 bool GetNextToken(Token* tokenLeido);
 
-void parser(FILE *file);
+void parser();
 const char* nombreToken(TokenType nombreToken);
 
 

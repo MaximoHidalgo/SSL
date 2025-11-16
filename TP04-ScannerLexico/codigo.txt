@@ -22,18 +22,3 @@ double matriz[10];
 int daytab[13];
 int (*daytab)[13];
 int *daytab[13];
-
-//fp: fp es funcion que retorna puntero a int
-//pf: pf es puntero a una funcion que retorna un int 
-//comp: comp es funcion que retorna puntero a void
-//comp: comp es puntero a una funcion que retorna un void 
-//argv: argv es puntero a  un puntero a char 
-//daytab: daytab es un arreglo de 13 int
-//daytab: daytab es un puntero a un arreglo de 13 int
-//daytab: daytab es un arreglo de 13 punteros a int
-//x: x es una funcion que retorna un puntero a un arreglo de punteros a una funcion que retorna un char
-//x: x es un arreglo de 3 punteros a una funcion que retorna un puntero a un arreglo de 5 chars
-
-
-
-// tipo  tipo-n-punteros fp
