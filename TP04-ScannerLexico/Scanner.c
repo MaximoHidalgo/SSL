@@ -52,7 +52,7 @@ bool GetNextToken(Token* tokenLeido){
         tokenLeido->lexema[i] = '\0';
 
         if (esLetra(c)) {
-            fprintf(stderr, "Error léxico: número seguido de letra, teniamos: %s y llego '%c'\n",tokenLeido->lexema, c);
+            fprintf(stderr, "Error lexico: numero seguido de letra, teniamos: %s y llego '%c'\n",tokenLeido->lexema, c);
             while ((c = getchar()) != EOF && esAlfanumerico(c)); // consumo resto del identificador corrupto y roto
             if (c != EOF) ungetc(c, stdin);
             return false;
@@ -83,7 +83,7 @@ bool GetNextToken(Token* tokenLeido){
         }
         default:
         {
-            fprintf(stderr, "Error léxico: carácter inesperado '%c'\n", c);
+            fprintf(stderr, "Error lexico: caracter inesperado '%c'\n", c);
             return false;
         }
     }

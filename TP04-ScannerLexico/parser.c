@@ -12,12 +12,13 @@ static void match(TokenType esperado);
 static void matchLexema(TokenType esperado, const char* lexemaEsperado);
 static void errorSintactico(const char* esperado);
 static NodoTipo* parseDeclarador();
-static NodoTipo* parsePostfijo();
+static NodoTipo* parsePostfijo(NodoTipo* base);
 static void imprimirTipo(NodoTipo* tipo, const char* id, const char* tipoBase);
 
 const char* obtenerAliasTipo(const char* tipo);
 //static void imprimirTipoRec(NodoTipo* tipo, const char* id, const char* tipoBase);
 static void imprimirTipoRec(NodoTipo* n, const char* tipoBaseAlias) ;
+static void freeNodoTipo(NodoTipo* n);
 
 
 /* Gramatica propuesta v1
@@ -100,11 +101,7 @@ void parser() {
         imprimirTipo(tipo, nombreID, tipoBase);
 
         // liberar
-        while (tipo) {
-            NodoTipo* tmp = tipo->sig;
-            free(tipo);
-            tipo = tmp;
-        }
+        freeNodoTipo(tipo);
     }
 }
 
@@ -112,30 +109,25 @@ void parser() {
 
 static NodoTipo* parseDeclarador() {
 
-    ///punero
-    if (tokenActual.type == OPERADORES && strcmp(tokenActual.lexema, "*") == 0) {
+    //Contar prefijos '*' 
+    int pointerCount = 0;
+    while (tokenActual.type == OPERADORES && strcmp(tokenActual.lexema, "*") == 0) {
         matchLexema(OPERADORES, "*");
-
-        NodoTipo* n = malloc(sizeof(NodoTipo));
-        n->tipo = T_PUNTERO;
-        n->dimensiones = 0;
-        n->parametros[0] = '\0';
-
-        n->sig = parseDeclarador();
-        return n;
+        pointerCount++;
     }
+
+    NodoTipo* node = NULL;
 
     //(declarador)
     if (tokenActual.type == PUNCTUATOR && strcmp(tokenActual.lexema, "(") == 0) {
         matchLexema(PUNCTUATOR, "(");
-        NodoTipo* dentro = parseDeclarador();
+        node = parseDeclarador();
         matchLexema(PUNCTUATOR, ")");
-
-        return parsePostfijo(dentro);
+        node = parsePostfijo(node);
     }
 
     // identificador
-    if (tokenActual.type == IDENTIFICADOR) {
+    else if (tokenActual.type == IDENTIFICADOR) {
         NodoTipo* idNode = malloc(sizeof(NodoTipo));
         idNode->tipo = T_BASE;
         idNode->dimensiones = 0;
@@ -144,11 +136,36 @@ static NodoTipo* parseDeclarador() {
 
         match(IDENTIFICADOR);
 
-        return parsePostfijo(idNode);
+        node = parsePostfijo(idNode);
+    }
+    else {    
+        errorSintactico("declarador");
+        return NULL;
     }
 
-    errorSintactico("declarador");
-    return NULL;
+    //insertar los punteros
+    for (int i = 0; i < pointerCount; ++i) {
+        NodoTipo* p = malloc(sizeof(NodoTipo));
+        if (!p) { perror("malloc"); exit(EXIT_FAILURE); }
+        p->tipo = T_PUNTERO;
+        p->dimensiones = 0;
+        p->parametros[0] = '\0';
+
+        /* Si node es base directamente, p pasa a ser la nueva cabecera */
+        if (node == NULL || node->tipo == T_BASE) {
+            p->sig = node;
+            node = p;
+        } else {
+            /* buscar el nodo cuyo siguiente es T_BASE (insertar antes del base) */
+            NodoTipo* cur = node;
+            while (cur->sig && cur->sig->tipo != T_BASE) cur = cur->sig;
+            /* ahora cur->sig es el T_BASE (o NULL). Insertamos p antes de cur->sig */
+            p->sig = cur->sig;
+            cur->sig = p;
+        }
+    }
+
+    return node;
 }
 
 
@@ -156,7 +173,7 @@ static NodoTipo* parsePostfijo(NodoTipo* base) {
 
     while (1) {
 
-        //arreglo
+        /* arreglo: [LiteralNumerico?] (dim == 0 => tamaño indefinido) */
         if (tokenActual.type == PUNCTUATOR && strcmp(tokenActual.lexema, "[") == 0) {
 
             matchLexema(PUNCTUATOR, "[");
@@ -170,15 +187,28 @@ static NodoTipo* parsePostfijo(NodoTipo* base) {
             matchLexema(PUNCTUATOR, "]");
 
             NodoTipo* n = malloc(sizeof(NodoTipo));
+            if (!n) { perror("malloc"); exit(EXIT_FAILURE); }
             n->tipo = T_ARREGLO;
-            n->dimensiones = dim;
+            n->dimensiones = dim; 
             n->parametros[0] = '\0';
-            n->sig = base;
-            base = n;
+            if (base && base->tipo == T_PUNTERO) {
+                NodoTipo* p = base;
+                NodoTipo* tail = p;
+                while (tail->sig && tail->sig->tipo == T_PUNTERO) tail = tail->sig;
+                NodoTipo* B = tail->sig;
+                n->sig = B;
+                tail->sig = n;
+                base = p;
+            } else {
+                /* comportamiento normal: arreglo envuelve base */
+                n->sig = base;
+                base = n;
+            }
+
             continue;
         }
 
-        // funcion
+        /* funcion: ( [ListaParametros] ) */
         if (tokenActual.type == PUNCTUATOR && strcmp(tokenActual.lexema, "(") == 0) {
 
             matchLexema(PUNCTUATOR, "(");
@@ -189,57 +219,74 @@ static NodoTipo* parsePostfijo(NodoTipo* base) {
             if (!(tokenActual.type == PUNCTUATOR && strcmp(tokenActual.lexema, ")") == 0)) {
 
                 while (1) {
-                    // parametros
                     if (tokenActual.type != KEYWORD)
-                        errorSintactico("tipo de parámetro");
+                        errorSintactico("tipo de parametro");
 
                     char t[64];
                     strcpy(t, tokenActual.lexema);
                     match(KEYWORD);
-                    parseDeclarador();
 
-                    
+                    NodoTipo* paramTipo = parseDeclarador();
 
                     char id[64] = "";
-                    if (tokenActual.type == IDENTIFICADOR) {
-                        strcpy(id, tokenActual.lexema);
-                        match(IDENTIFICADOR);
+                    if (paramTipo) {
+                        NodoTipo* aux = paramTipo;
+                        while (aux && aux->tipo != T_BASE) aux = aux->sig;
+                        if (aux && aux->parametros[0] != '\0') {
+                            strcpy(id, aux->parametros);
+                            id[sizeof(id)-1] = '\0';
+                        }
                     }
 
+                    /* formar la representación textual del parametro */
                     char temp[128];
                     if (id[0])
                         snprintf(temp, sizeof(temp), "%s %s", t, id);
                     else
                         snprintf(temp, sizeof(temp), "%s", t);
 
-                    if (params[0]) strcat(params, ", ");
-                    strcat(params, temp);
+                    if (params[0]) strncat(params, ", ", sizeof(params)-strlen(params)-1);
+                    strncat(params, temp, sizeof(params)-strlen(params)-1);
 
-                    if (tokenActual.type == PUNCTUATOR && strcmp(tokenActual.lexema, ",") == 0)
+                    freeNodoTipo(paramTipo);
+
+                    if (tokenActual.type == PUNCTUATOR && strcmp(tokenActual.lexema, ",") == 0) {
                         matchLexema(PUNCTUATOR, ",");
-                    else
+                        continue;
+                    } else {
                         break;
+                    }
                 }
             }
 
             matchLexema(PUNCTUATOR, ")");
 
             NodoTipo* n = malloc(sizeof(NodoTipo));
+            if (!n) { perror("malloc"); exit(EXIT_FAILURE); }
             n->tipo = T_FUNCION;
+            /* copiar params de forma segura */
             strcpy(n->parametros, params);
             n->dimensiones = 0;
-            n->sig = base;
+            if (base && base->tipo == T_PUNTERO) {
+                NodoTipo* p = base;
+                NodoTipo* tail = p;
+                while (tail->sig && tail->sig->tipo == T_PUNTERO) tail = tail->sig;
+                NodoTipo* B = tail->sig;
+                n->sig = B;
+                tail->sig = n;
+                base = p;
+            } else {
+                n->sig = base;
+                base = n;
+            }
 
-            base = n;
             continue;
         }
-
         break;
     }
 
     return base;
 }
-
 
 
 static void match(TokenType t) {
@@ -263,7 +310,7 @@ static void matchLexema(TokenType t, const char* lex) {
 
 
 static void errorSintactico(const char* msg) {
-    fprintf(stderr, "Error sintáctico: esperaba %s, encontré '%s'\n",
+    fprintf(stderr, "Error sintactico: esperaba %s, encontre '%s'\n",
             msg,
             hayToken ? tokenActual.lexema : "EOF");
     exit(EXIT_FAILURE);
@@ -289,7 +336,7 @@ const char* obtenerAliasTipo(const char* tipo) {
     if (strcmp(tipo, "char") == 0) return "caracter";
     if (strcmp(tipo, "float") == 0) return "flotante";
     if (strcmp(tipo, "double") == 0) return "doble";
-    if (strcmp(tipo, "void") == 0) return "vacío";
+    if (strcmp(tipo, "void") == 0) return "void";
     return tipo; 
 }
 
@@ -301,29 +348,42 @@ static void imprimirTipoRec(NodoTipo* n, const char* tipoBaseAlias) {
         printf("%s", tipoBaseAlias);
         return;
     }
-    
-
-    if (n->tipo == T_PUNTERO) {
-        printf(" puntero a ");
-        imprimirTipoRec(n->sig, tipoBaseAlias);
-        return; 
-    }
-    
-
-    imprimirTipoRec(n->sig, tipoBaseAlias); 
-
 
     switch (n->tipo) {
+        case T_PUNTERO:
+            /* prefijo */
+            printf("puntero a ");
+            imprimirTipoRec(n->sig, tipoBaseAlias);
+            break;
 
         case T_ARREGLO:
-            printf(" arreglo de %d elementos de", n->dimensiones);
+            /* prefijo; dim==0 => tamano indefinido */
+            if (n->dimensiones == 0)
+                printf("arreglo de tamano indefinido de ");
+            else
+                printf("arreglo de %d elementos de ", n->dimensiones);
+            imprimirTipoRec(n->sig, tipoBaseAlias);
             break;
 
         case T_FUNCION:
+            /* prefijo: funcion ... y retorna <tipo interno> */
             if (n->parametros[0] == '\0')
-                printf(" función que no recibe parámetros y retorna");
+                printf("funcion que no recibe parametros y retorna ");
             else
-                printf(" función que recibe (%s) y retorna", n->parametros);
+                printf("funcion que recibe (%s) y retorna ", n->parametros);
+            imprimirTipoRec(n->sig, tipoBaseAlias);
             break;
+
+        default:
+            imprimirTipoRec(n->sig, tipoBaseAlias);
+            break;
+    }
+}
+
+static void freeNodoTipo(NodoTipo* n) {
+    while (n) {
+        NodoTipo* tmp = n->sig;
+        free(n);
+        n = tmp;
     }
 }
