@@ -1,3 +1,4 @@
+SHELL = sh
 CC = gcc
 
 all: scannerTest
@@ -18,4 +19,4 @@ clean:
 	rm -f *.o scannerTest
 
 run: scannerTest
-	./scannerTest
+	./scannerTest < codigo.txt

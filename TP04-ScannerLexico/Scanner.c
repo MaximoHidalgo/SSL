@@ -19,7 +19,6 @@ bool GetNextToken(Token* tokenLeido){
     do{c = getchar();} while (c != EOF && esEspacio(c));
 
     if (c == EOF){ 
-        fprintf(stderr, "Info: EOF\n");
         return false;
     }
 

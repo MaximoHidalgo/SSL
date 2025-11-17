@@ -22,27 +22,3 @@ double matriz[10];
 int daytab[13];
 int (*daytab)[13];
 int *daytab[13];
-
-/*  x es entero
-    i es entero
-    p es puntero a entero
-    f es funcion que no recibe parametros y retorna entero
-    c es caracter
-    argv es puntero a puntero a ... a caracter (varios niveles de puntero a caracter)
-    y123 es flotante
-    nombre es caracter
-    funcion es funcion que recibe (int parametro) y retorna vacio
-    fp es funcion que no recibe parametros y retorna puntero a entero
-    a1 es flotante
-    pf es puntero a funcion que no recibe parametros y retorna entero
-    comp es funcion que no recibe parametros y retorna puntero a vacio
-    comp es puntero a funcion que no recibe parametros y retorna vacio
-    x es funcion que retorna puntero a arreglo (tamaño indefinido) de punteros a funcion que retorna caracter
-    x es arreglo de 3 punteros a funcion que retorna puntero a arreglo de 5 caracteres
-    declaracion invalida en C: arreglo de void con tamaño indefinido (no permitido)
-    a es arreglo de 10 enteros
-    matriz es arreglo de 10 dobles
-    daytab es arreglo de 13 enteros
-    daytab es puntero a arreglo de 13 enteros
-    daytab es arreglo de 13 punteros a entero
-*/

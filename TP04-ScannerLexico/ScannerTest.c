@@ -30,7 +30,8 @@ int main() {
         //Token tk;
         parser();
         //while(GetNextToken(&tk)) printToken(tk);
-
+        fprintf(stderr, "Info: EOF\n");
+        
     //parser(file);
    // if (file != stdin) fclose(file);
 }
