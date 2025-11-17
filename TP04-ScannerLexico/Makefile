@@ -17,6 +17,7 @@ main.o: main.c Scanner.h
 
 clean:
 	rm -f *.o main
+	rm -f *.txt
 
 run: main
-	./main < codigo.txt
+	./main < codigo.c > declaracionesLN.txt

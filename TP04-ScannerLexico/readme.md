@@ -198,3 +198,23 @@ ESPACIOS        →  [\t\n\v\f\r]+
 
 <ENDFILE_TOKEN> -> representa el final del archivo
 ```
+## 🧮 Especificacion de la sintaxis en BNF:
+
+```
+translation-unit :
+  declaration
+  translation-unit declaration
+
+declaration :
+  name dcl ;
+
+dcl :
+  optional* direct-dcl
+
+direct-dcl:
+  name
+  (dcl)
+  direct-dcl()
+  direct-dcl[ListaParametros]
+
+```
