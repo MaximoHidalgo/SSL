@@ -3,8 +3,6 @@
 #include <string.h>
 #include "Scanner.h"
 
-
-
 int esLetra(int c);
 int esNumero(int c);
 int esAlfanumerico(int c);

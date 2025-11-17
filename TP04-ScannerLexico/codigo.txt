@@ -22,3 +22,4 @@ double matriz[10];
 int daytab[13];
 int (*daytab)[13];
 int *daytab[13];
+int *daytab[130];

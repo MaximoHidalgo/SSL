@@ -15,16 +15,12 @@ typedef enum TokenType{
     PUNCTUATOR,
 } TokenType;
 
-
-
-
 int main_parser_loop(void);
 
 typedef struct Token {
     TokenType type; // 0 1 2 3 4 5 6 7
     char lexema[LEXEMA_MAX]; //int x ; 
 } Token;
-/**/
 
 typedef enum {T_BASE, T_PUNTERO, T_ARREGLO, T_FUNCION} TipoNodo;
 

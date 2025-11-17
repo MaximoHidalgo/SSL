@@ -3,7 +3,6 @@
 #include <string.h>
 #include "Scanner.h"
 
-
 const char* nombreToken(TokenType nombreToken) {
     switch (nombreToken) {
         case KEYWORD: return "KEYWORD";
@@ -16,11 +15,18 @@ const char* nombreToken(TokenType nombreToken) {
     }
 }
 
-
 void printToken(Token t){
     printf("TokenType: %s, Lexema: %s.\n",TokenTypeNames[t.type], t.lexema);
 }
 
+int main() {
+        parser();
+        fprintf(stderr, "Info: EOF\n");
+}
+
+
+//VERSION VIEJA DEL SCANNER
+/*
 int main() {
    // FILE* file = fopen("codigo.txt", "r");
     //if(file == NULL){
@@ -28,12 +34,8 @@ int main() {
     //    return 1;
     //}
         //Token tk;
-        parser();
-        //while(GetNextToken(&tk)) printToken(tk);
-        fprintf(stderr, "Info: EOF\n");
-        
+        //while(GetNextToken(&tk)) printToken(tk);    
     //parser(file);
    // if (file != stdin) fclose(file);
 }
-
-
+   */
