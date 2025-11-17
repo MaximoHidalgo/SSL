@@ -1,64 +1,88 @@
 #include <stdio.h>
 
 /*
- * Bloque de comentario multilinea inicial 1
- * Bloque de comentario multilinea inicial 2
- * Bloque de comentario multilinea inicial 3
+ * Comentario multilinea inicial largo
+ * Línea adicional 1
+ * Línea adicional 2
+ * Fin del comentario inicial
  */
 
-// Comentario simple A
-// Comentario simple B con más palabras agregadas
+// Comentario simple inicial con texto extendido
 
+// --- PRUEBA DE STRINGS AVANZADA ---
 int main() {
-    printf("Inicio de ejecución\n"); // Comentario al final de línea
 
-    // Strings con secuencias que parecen comentarios pero no lo son
-    char *s1 = "Cadena con /* comentario trucho */ incrustado";
-    char *s2 = "Cadena con \\\"comillas escapadas\\\" y // barras dobles";
-    char *s3 = "Cadena con salto de línea\n que no debe cortar el texto";
+    printf("Inicio del test mejorado\n");  // Comentario al final
 
-    // Caracteres individuales de prueba
-    char ch1 = '/';
-    char ch2 = '*';
-    char ch3 = '\'';
-    char ch4 = '\\';
+    // String con comentario falso multilinea
+    char *s1 = "Texto con /* comentario falso */ incrustado";
 
-    /* Comentario multilinea de prueba general */
-    for(int i = 0; i < 9500; i++) {
-        // Comentario simple dentro del for
-        printf("Iter %d\n", i); /* Otro comentario al final */
+    // String con muchas barras y escapes
+    char *s2 = "Ruta: C:\\\\Users\\\\Test // no es comentario";
+
+    // String con comillas continuadas
+    char *s3 = "Cadena con \\\"comillas\\\" y /* falso */ // falso";
+
+    // String que continúa en la línea siguiente con '\'
+    char *s4 = "Linea 1 de string\
+ y linea 2 sin romper comentarios";
+
+    // CHARS DE PRUEBA
+    char c1 = '/';
+    char c2 = '*';
+    char c3 = '\"';
+    char c4 = '\\';
+    char c5 = '\''; // comilla simple
+
+    /* Comentario multilinea
+       con * y / mezclados */// <- el preprocesador debe seguir el multilinea
+       /* y con cosas raras *** //// *** /*/**/ */
+
+    // --- PRUEBA DE MACROS ---
+    #define FALSO /* esto no es un comentario para el preprocesador del TP */
+    #define VERDADERO 123 // este sí es comentario verdadero
+
+    #define CADENA "Texto /* falso */"
+
+    // Comentario antes del for
+    for(int i = 0; i < 5000; i++) {
+        printf("Iter %d\n", i); // comentario al final
     }
 
-    // Comentario previo al return
-    return 0; /* Comentario luego del return */
+    // Comentario antes del return
+    return 0; /* retorno con comentario */
 }
 
-/* Comentario multilínea colgado zona final
- * -------------------------------
- */
+/* Comentario colgado al final del main */
 
-/* Repetición de bloques de código para agrandar tamaño del archivo */
+// PRUEBA: COMENTARIOS ANIDADOS (ilegales pero buen test)
+/*
+    Comentario externo
+    /*
+        Comentario interno (no válido)
+     */
+    Linea final del comentario externo
+*/
 
-void ejemploFuncion() {
-    // Otro comentario simple
-    char *txt = "Cadena con /*bloque falso*/ y // pseudo comentario";
+// --- FUNCION EXTRA ---
+void funcionExtra() {
+    // comentario simple
+    char *txt = "Cadena // falsa y /* falso */ real";
     printf("%s\n", txt);
 
-    /* Comentario multilinea dentro de una función */
-    for(int j = 0; j < 9500; j++) {
-        printf("Loop interno %d\n", j);
+    /* comentario multilinea dentro */
+    for(int j = 0; j < 4000; j++) {
+        printf("Loop extra %d\n", j);
     }
 }
 
-/* Constante para simular procesamiento extendido */
-
-#define CANTIDAD 800
+/* Prueba de secuencias repetitivas */
+#define REP 500
 
 void funcionPesada() {
-    for(int k = 0; k < CANTIDAD; k++) {
-        ejemploFuncion();
+    for(int k = 0; k < REP; k++) {
+        funcionExtra();
     }
 }
 
-/* Comentario final del archivo */
-// Último comentario simple del archivo
+// Comentario final del archivo
