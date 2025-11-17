@@ -24,7 +24,7 @@
 ## 📌 Objetivos
 
 - Diseñar un **Escáner Léxico** que se encargue de identificar diferentes tipos de tokens.  
-- Hacer la implementación de **Scanner.c Scanner.h y ScannerTest.c** del escáner léxico.  
+- Hacer la implementación de **Scanner.c Scanner.h y main.c** del escáner léxico.  
 - Describir las especificaciones en **LR ER AF GL**.
 - Realizar un **archivo de texto** que se utilice como una prueba de que el escáner funciona.
 
@@ -40,8 +40,8 @@
 | `codigo.txt`              | Código que contiene un codigo para escanear     |
 | `scanner.c`               | Archivo con las funciones lógicas del scanner   |
 | `scanner.h`               | Interfaz y definición de tipos                  |
-| `scannerTest.c`           | Archivo que contiene la función main            |
-| `ScannerTest.exe`         | Programa/demuestra que el codigo funciona       |
+| `main.c`           | Archivo que contiene la función main            |
+| `main.exe`         | Programa/demuestra que el codigo funciona       |
 | `README.md      `         | Es este mismo archivo de lectura sobre el TP    |
 
 

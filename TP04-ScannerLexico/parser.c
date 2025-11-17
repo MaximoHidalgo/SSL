@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "Scanner.h"
+#include "parser.h"
 
 static Token tokenActual;
 static bool hayToken = false;

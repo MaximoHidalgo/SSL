@@ -1,10 +1,10 @@
 SHELL = sh
 CC = gcc
 
-all: scannerTest
+all: main
 
-scannerTest: Scanner.o parser.o ScannerTest.o
-	$(CC) -o scannerTest Scanner.o parser.o ScannerTest.o
+main: Scanner.o parser.o main.o
+	$(CC) -o main Scanner.o parser.o main.o
 
 Scanner.o: Scanner.c Scanner.h
 	$(CC) -c Scanner.c
@@ -12,11 +12,11 @@ Scanner.o: Scanner.c Scanner.h
 parser.o: parser.c Scanner.h
 	$(CC) -c parser.c
 
-ScannerTest.o: ScannerTest.c Scanner.h
-	$(CC) -c ScannerTest.c
+main.o: main.c Scanner.h
+	$(CC) -c main.c
 
 clean:
-	rm -f *.o scannerTest
+	rm -f *.o main
 
-run: scannerTest
-	./scannerTest < codigo.txt
+run: main
+	./main < codigo.txt
