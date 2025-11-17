@@ -218,16 +218,16 @@ direct-dcl:
   direct-dcl[dimensiones]
 
 ```
-
-main :
+```
+main:
   parser
   main parser
 
-parser :
+parser:
   identificador parseDeclarador;
 
-parseDeclarador :
-  parsePostfijo* imprimirTipoRec
+parseDeclarador:
+  parsePostfijo imprimirTipoRec
 
 imprimirTipoRec:
   identificador
