@@ -1,60 +1,64 @@
 #include <stdio.h>
-/* 
- * Comentario variasLineas colgado 1
- * Comentario variasLineas colgado 2
- * Comentario variasLineas colgado 3
+
+/*
+ * Bloque de comentario multilinea inicial 1
+ * Bloque de comentario multilinea inicial 2
+ * Bloque de comentario multilinea inicial 3
  */
 
-// Comentario simple línea 1
-// Comentario simple línea 2 con mas texto
+// Comentario simple A
+// Comentario simple B con más palabras agregadas
 
 int main() {
-    printf("Empieza prueba\n"); // Hago comentario al final de la linea
+    printf("Inicio de ejecución\n"); // Comentario al final de línea
 
-    // Prueba de strings con comentarios falsos dentro
-    char *str1 = "Este es un string con /* un falso comentario */ dentro";
-    char *str2 = "String con \\\"comillas con secuencia de escape\\\" y // barras";
-    char *str3 = "String con salto de línea\n no debe romper";
+    // Strings con secuencias que parecen comentarios pero no lo son
+    char *s1 = "Cadena con /* comentario trucho */ incrustado";
+    char *s2 = "Cadena con \\\"comillas escapadas\\\" y // barras dobles";
+    char *s3 = "Cadena con salto de línea\n que no debe cortar el texto";
 
-    // Prueba de caracteres
-    char c1 = '/';
-    char c2 = '*';
-    char c3 = '\'';
-    char c4 = '\\';
+    // Caracteres individuales de prueba
+    char ch1 = '/';
+    char ch2 = '*';
+    char ch3 = '\'';
+    char ch4 = '\\';
 
-    /* Comentarios variasLineas trucho */
-    for(int i = 0; i < 10000; i++) {
-        // Comentario dentro del for
-        printf("Iteración %d\n", i); /* Comentario al final */
+    /* Comentario multilinea de prueba general */
+    for(int i = 0; i < 9500; i++) {
+        // Comentario simple dentro del for
+        printf("Iter %d\n", i); /* Otro comentario al final */
     }
 
-    // Comentario antes del return
-    return 0; /* Comentario despues de return */
+    // Comentario previo al return
+    return 0; /* Comentario luego del return */
 }
 
-/* Comentario variasLineas colgado 4
- * ----------------
+/* Comentario multilínea colgado zona final
+ * -------------------------------
  */
-/* Repetimos mucho código para hacer el archivo grande */
 
-void funcionEjemplo() {
-    // Comentario simple
-    char *texto = "Texto con /*comentario falso*/ y // algo mas";
-    printf("%s\n", texto);
-    /* Comentario variasLineas
-       en una funcion */
-    for(int j = 0; j < 10000; j++) {
-        printf("Loop %d\n", j);
+/* Repetición de bloques de código para agrandar tamaño del archivo */
+
+void ejemploFuncion() {
+    // Otro comentario simple
+    char *txt = "Cadena con /*bloque falso*/ y // pseudo comentario";
+    printf("%s\n", txt);
+
+    /* Comentario multilinea dentro de una función */
+    for(int j = 0; j < 9500; j++) {
+        printf("Loop interno %d\n", j);
     }
 }
 
-/* Constante para que se vea más la diferencia de tiempo con el benchmark*/
+/* Constante para simular procesamiento extendido */
 
-#define REPETICIONES 1000
+#define CANTIDAD 800
 
-void funcionGrande() {
-    for(int k=0; k<REPETICIONES; k++) {
-        funcionEjemplo();
+void funcionPesada() {
+    for(int k = 0; k < CANTIDAD; k++) {
+        ejemploFuncion();
     }
 }
-/* Comentario fin de archivo */
+
+/* Comentario final del archivo */
+// Último comentario simple del archivo
