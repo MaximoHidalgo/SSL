@@ -201,24 +201,6 @@ ESPACIOS        →  [\t\n\v\f\r]+
 ## 🧮 Especificacion de la sintaxis en BNF:
 
 ```
-translation-unit :
-  declaration
-  translation-unit declaration
-
-declaration :
-  name dcl ;
-
-dcl :
-  optional* direct-dcl
-
-direct-dcl:
-  name
-  (dcl)
-  direct-dcl()
-  direct-dcl[dimensiones]
-
-```
-```
 main:
   parser
   main parser
