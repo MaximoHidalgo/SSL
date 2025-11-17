@@ -215,6 +215,27 @@ direct-dcl:
   name
   (dcl)
   direct-dcl()
-  direct-dcl[ListaParametros]
+  direct-dcl[dimensiones]
 
 ```
+
+main :
+  parser
+  main parser
+
+parser :
+  identificador parseDeclarador;
+
+parseDeclarador :
+  parsePostfijo* imprimirTipoRec
+
+imprimirTipoRec:
+  identificador
+  (parseDeclarador)
+  imprimirTipoRec()
+  imprimirTipoRec[dimensiones]
+
+```
+
+
+

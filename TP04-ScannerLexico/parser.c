@@ -3,53 +3,6 @@
 #include <string.h>
 #include "parser.h"
 
-
-
-/* Gramatica propuesta v1
-    Declaracion:
-    TipoBase Declarador ';'
-
-TipoBase:
-      int 
-    | char 
-    | float 
-    | double 
-    | void
-
-Declarador:
-      Punteros DeclaradorPostfijo
-    | DeclaradorPostfijo      // Para casos sin *
-
-Punteros:
-      '*' 
-    | '*' Punteros
-
-DeclaradorPostfijo:
-      Identificador Postfijo
-    | '(' Declarador ')' Postfijo   // <-- necesario para (*pf)()
-
-Postfijo:
-      '[' LiteralNumerico ']' Postfijo     // Arreglo
-    | '(' ListaParametrosOpt ')' Postfijo  // Función
-    | ε
-
-ListaParametrosOpt:
-      ε
-    | ListaParametros
-
-ListaParametros:
-      Parametro
-    | Parametro ',' ListaParametros
-
-Parametro:
-      TipoBase Declarador    // <-- corregido: C permite int *p, int (*fp)(), etc.
-
-
-*/
-
-
-
-
 void parser() {
     hayToken = GetNextToken(&tokenActual);
 
@@ -88,8 +41,6 @@ void parser() {
         freeNodoTipo(tipo);
     }
 }
-
-
 
 static NodoTipo* parseDeclarador() {
 
@@ -151,7 +102,6 @@ static NodoTipo* parseDeclarador() {
 
     return node;
 }
-
 
 static NodoTipo* parsePostfijo(NodoTipo* base) {
 
@@ -272,7 +222,6 @@ static NodoTipo* parsePostfijo(NodoTipo* base) {
     return base;
 }
 
-
 static void match(TokenType t) {
     if (!hayToken) errorSintactico("token inesperado EOF");
 
@@ -291,8 +240,6 @@ static void matchLexema(TokenType t, const char* lex) {
     }
 }
 
-
-
 static void errorSintactico(const char* msg) {
     fprintf(stderr, "Error sintactico: esperaba %s, encontre '%s'\n",
             msg,
@@ -300,20 +247,12 @@ static void errorSintactico(const char* msg) {
     exit(EXIT_FAILURE);
 }
 
-
-
-
 static void imprimirTipo(NodoTipo* tipo, const char* id, const char* base) {
     printf("%s es ", id);
     const char* tipoBaseAlias = obtenerAliasTipo(base); 
-    //imprimirTipoRec(tipo, id, base);
     imprimirTipoRec(tipo, tipoBaseAlias);
     printf("\n");
 }
-
-
-
-
 
 const char* obtenerAliasTipo(const char* tipo) {
     if (strcmp(tipo, "int") == 0) return "entero";
@@ -323,8 +262,6 @@ const char* obtenerAliasTipo(const char* tipo) {
     if (strcmp(tipo, "void") == 0) return "void";
     return tipo; 
 }
-
-
 
 static void imprimirTipoRec(NodoTipo* n, const char* tipoBaseAlias) {
 
@@ -371,3 +308,49 @@ static void freeNodoTipo(NodoTipo* n) {
         n = tmp;
     }
 }
+
+
+
+
+
+/* Gramatica propuesta v1
+    Declaracion:
+    TipoBase Declarador ';'
+
+TipoBase:
+      int 
+    | char 
+    | float 
+    | double 
+    | void
+
+Declarador:
+      Punteros DeclaradorPostfijo
+    | DeclaradorPostfijo      // Para casos sin *
+
+Punteros:
+      '*' 
+    | '*' Punteros
+
+DeclaradorPostfijo:
+      Identificador Postfijo
+    | '(' Declarador ')' Postfijo   // <-- necesario para (*pf)()
+
+Postfijo:
+      '[' LiteralNumerico ']' Postfijo     // Arreglo
+    | '(' ListaParametrosOpt ')' Postfijo  // Función
+    | ε
+
+ListaParametrosOpt:
+      ε
+    | ListaParametros
+
+ListaParametros:
+      Parametro
+    | Parametro ',' ListaParametros
+
+Parametro:
+      TipoBase Declarador    // <-- corregido: C permite int *p, int (*fp)(), etc.
+
+
+*/
