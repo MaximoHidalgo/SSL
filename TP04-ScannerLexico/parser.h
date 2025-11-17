@@ -5,19 +5,18 @@
 #include <string.h>
 #include "Scanner.h"
 
+static Token tokenActual;
+static bool hayToken = false;
+
 static void declaracion();
 static void match(TokenType esperado);
 static void matchLexema(TokenType esperado, const char* lexemaEsperado);
 static void errorSintactico(const char* esperado);
-static NodoTipo* parseDeclarador();
-static NodoTipo* parsePostfijo(NodoTipo* base);
 static void imprimirTipo(NodoTipo* tipo, const char* id, const char* tipoBase);
-static Token tokenActual;
-static bool hayToken = false;
-const char* obtenerAliasTipo(const char* tipo);
 static void imprimirTipoRec(NodoTipo* n, const char* tipoBaseAlias) ;
 static void freeNodoTipo(NodoTipo* n);
-
-
+const char* obtenerAliasTipo(const char* tipo);
+static NodoTipo* parseDeclarador();
+static NodoTipo* parsePostfijo(NodoTipo* base);
 
 #endif
